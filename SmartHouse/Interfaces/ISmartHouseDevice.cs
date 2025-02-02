@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Interfaces
 {
-    internal interface ISmartHouseDevice
+    public interface ISmartHouseDevice
     {
+        public void TurnOn();
+        public void TurnOff();
+        public void Reset();
+        public void GetStatus();
+        public void Connect();
     }
 }
