@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartHouse.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace SmartHouse.Interfaces
 {
     public interface IDeviceManager
     {
-        public void AddDevice(ISmartHouseDevice device);
-        public void RemoveDevice(string deviceId);
+        public void AddDevice(SmartHouseDevice device);
+        public void RemoveDevice(int deviceId);
         public void RemoveAllDevices();
         public void TurnOnAllDevicesOn();
         public void TurnOffAllDevicesOff();
