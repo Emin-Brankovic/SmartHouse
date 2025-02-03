@@ -1,4 +1,6 @@
-﻿namespace SmartHouse
+﻿using SmartHouse.Models;
+
+namespace SmartHouse
 {
     internal class Program
     {
