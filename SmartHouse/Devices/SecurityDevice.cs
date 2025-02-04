@@ -12,16 +12,14 @@ namespace SmartHouse.Devices
 {
     public class SecurityDevice : SmartHouseDevice
     {
-        public SecurityDevice(string deviceName,string location ,bool connection = true,int batteryLevel=60,SecurityDeviceStates state=SecurityDeviceStates.Disarmed)
+        public SecurityDevice(string deviceName,string location ,bool connection = true)
             : base(deviceName, connection)
         {
             Location = location;
-            BatteryLevel=batteryLevel; 
-            State = state;
         }
 
-        public int BatteryLevel { get; set; }
+        public int BatteryLevel { get; set; } = 60;
         public string Location { get; set; }
-        public SecurityDeviceStates State { get; set; }
+        public SecurityDeviceStates State { get; set; } = SecurityDeviceStates.Disarmed;
     }
 }

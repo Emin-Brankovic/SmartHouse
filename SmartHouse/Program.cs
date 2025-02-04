@@ -11,32 +11,65 @@ namespace SmartHouse
         {
             //Console.WriteLine("Hello, World!");
 
-            //var lightsystem = new LightSystem();
+            LightSystem lightSystem = new LightSystem();
+            EntertainmentSystem entertainmentSystem = new EntertainmentSystem();
+            SecuritySystem securitySystem = new SecuritySystem();
 
-            //lightsystem.AddDevice(new LightDevice("Livingroom Lamp"));
-            //var device = lightsystem.GetDeviceById(1) as LightDevice;
-            //Console.WriteLine(device?.Color);
-            //lightsystem.ShowDevices();
-            //lightsystem.ChangeLightColor(1, LightColors.Red);
-            //Console.WriteLine(device?.Color);
+            for (int i = 0; i < 5; i++)
+            {
+                lightSystem.AddDevice(new LightDevice($"Light device {i+1}"));
+            }
 
-            //Console.WriteLine("-------------------------------------------------------------");
-
-            //var security = new SecuritySystem();
-            //security.AddDevice(new LightDevice("Device Security"));
-            //security.ShowDevices();
-
-            //Console.WriteLine("-------------------------------------------------------------");
+            for (int i = 0; i < 5; i++)
+            {
+                entertainmentSystem.AddDevice(new EntertainmentDevice($"Entertainment device {i + 1}",
+                    new List<ConnectivityTypes> { ConnectivityTypes.Bluetooth,ConnectivityTypes.WiFi,ConnectivityTypes.Wired}));
+            }
 
 
-            //var enetertainment = new EntertainmentSystem();
-            //enetertainment.AddDevice(new LightDevice("Enetertaiment Device"));
-            //enetertainment.ShowDevices();
+            for (int i = 0; i < 5; i++)
+            {
+                securitySystem.AddDevice(new SecurityDevice($"Security device {i + 1}","Garage"));
+            }
+
+            lightSystem.TurnOnAllDevicesOn();
+
+            lightSystem.ChangeLightColor(1, LightColors.Blue);
+            lightSystem.ChangeLightBrightnes(1, 55);
+            lightSystem.ChangeLightColor(2, LightColors.Red);
+            lightSystem.ChangeLightColor(3, LightColors.Purple);
+            lightSystem.ChangeColorTemperature(4, 4500);
 
 
-            LightSystem LightSystem = new LightSystem();
-            EntertainmentSystem EntertainmentSystem = new EntertainmentSystem();
-            SecuritySystem SecuritySystem = new SecuritySystem();
+            lightSystem.ShowDevices();
+            securitySystem.ShowDevices();
+            entertainmentSystem.ShowDevices();
+
+            Console.WriteLine("------------------------------------------");
+
+            try
+            {
+                var lightdevice=lightSystem.GetDevice(12);
+                Console.WriteLine(lightdevice.Color);
+                Console.WriteLine(lightdevice.Brightnes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            try
+            {
+                var lightdevice1 = lightSystem.GetDevice(4);
+                Console.WriteLine(lightdevice1.Color);
+                Console.WriteLine(lightdevice1.Brightnes);
+                Console.WriteLine(lightdevice1.CurrentColorTemperature);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
 
 
         }
