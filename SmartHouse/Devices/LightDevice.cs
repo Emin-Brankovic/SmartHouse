@@ -21,9 +21,9 @@ namespace SmartHouse.Devices
 
         public LightColors Color { get; set; }
         public int Brightnes { get; set; }
-        private readonly int MaxColorTemperature = 6500;
-        private readonly int MinColorTemperature = 2700; 
-        public int CurrentColorTemperature { get; private set; }
+        public readonly int MaxColorTemperature = 6500;
+        public readonly int MinColorTemperature = 2700; 
+        public int CurrentColorTemperature { get; set; }
 
 
     }

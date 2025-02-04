@@ -16,7 +16,7 @@ namespace SmartHouse.SmartHouseSystems
         public void ChangeLightColor(int deviceId,LightColors color)
         {
             var lightDevice = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as LightDevice;
-            if (lightDevice != null)
+            if (lightDevice != null && lightDevice.IsOn)
                 lightDevice.Color = color;
             else
             {
@@ -28,7 +28,7 @@ namespace SmartHouse.SmartHouseSystems
         public void ChangeLightBrightnes(int deviceId, int brightnesLevel)
         {
             var lightDevice = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as LightDevice;
-            if (lightDevice != null)
+            if (lightDevice != null && lightDevice.IsOn)
                 lightDevice.Brightnes = brightnesLevel;
             else
             {
@@ -36,5 +36,27 @@ namespace SmartHouse.SmartHouseSystems
                 return;
             }
         }
+
+        public void ChangeColorTemperature(int deviceId, int temperature)
+        {
+            var lightDevice = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as LightDevice;
+            if (lightDevice != null && lightDevice.IsOn)
+            {
+                if (temperature<=lightDevice.MaxColorTemperature && temperature>=lightDevice.MinColorTemperature)
+                    lightDevice.CurrentColorTemperature=temperature;
+                else
+                    Console.WriteLine("Entered temperature out of range");
+            }
+        }
+
+        public LightDevice GetDevice(int deviceId)
+        {
+            var device = GetDeviceById(deviceId) as LightDevice;
+            if (device != null)
+                return device;
+            else
+                throw new Exception("Device not found");
+        }
+
     }
 }

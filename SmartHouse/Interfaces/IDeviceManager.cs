@@ -15,6 +15,5 @@ namespace SmartHouse.Interfaces
         public void TurnOnAllDevicesOn();
         public void TurnOffAllDevicesOff();
         public void ShowDevices();
-        public SmartHouseDevice GetDeviceById(int deviceId);
     }
 }

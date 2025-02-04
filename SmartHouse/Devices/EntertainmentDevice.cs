@@ -22,7 +22,7 @@ namespace SmartHouse.Devices
         public int CurrentVolume{ get; set; }
         public int MaxVolume { get; set; }  
         public bool IsMuted { get; set; }
-        public List<ConnectivityTypes> ConnectivityTypes { get; set; }
+        public List<ConnectivityTypes> ConnectivityTypes { get;  set; }
 
     }
 }

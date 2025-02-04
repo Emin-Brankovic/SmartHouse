@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Models
 {
-    public class DeviceManager : IDeviceManager
+    public abstract class DeviceManager : IDeviceManager
     {
         //Maybe change data type from List to Dictionary. See the what is better for implementation
         protected List<SmartHouseDevice> _devices=new List<SmartHouseDevice>();
@@ -38,7 +38,7 @@ namespace SmartHouse.Models
         public void ShowDevices()
         {
            foreach(var device in _devices)
-                Console.WriteLine(device.DeviceName + " " + device.DeviceId);
+                Console.WriteLine(device.DeviceName);
         }
 
         public void TurnOffAllDevicesOff()
@@ -57,7 +57,7 @@ namespace SmartHouse.Models
             }
         }
 
-        public SmartHouseDevice? GetDeviceById(int deviceId)
+        protected SmartHouseDevice? GetDeviceById(int deviceId)
         {
             var device=_devices.FirstOrDefault(x=>x.DeviceId == deviceId);
             if (device != null) return device;
