@@ -43,6 +43,23 @@ namespace SmartHouse.Models
             }
         }
 
+        public void Disconnect()
+        {
+            if (!IsOn) return;
+
+            if (IsConnected)
+            {
+                Console.Write("Disconnecting ");
+                for (int i = 0; i < new Random().Next(5, 20); i++)
+                {
+                    Console.Write(".");
+                    Thread.Sleep(300);
+                }
+                Console.WriteLine(" Disconnected");
+                IsConnected = false;
+            }
+        }
+
         public void GetStatus()
         {
             Console.WriteLine($"Status for device: {DeviceName}");
@@ -66,5 +83,7 @@ namespace SmartHouse.Models
         {
            IsOn = true;
         }
+
+
     }
 }

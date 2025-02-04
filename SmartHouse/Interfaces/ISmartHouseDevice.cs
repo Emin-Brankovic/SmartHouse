@@ -13,5 +13,6 @@ namespace SmartHouse.Interfaces
         public void Reset();
         public void GetStatus();
         public void Connect();
+        public void Disconnect();
     }
 }

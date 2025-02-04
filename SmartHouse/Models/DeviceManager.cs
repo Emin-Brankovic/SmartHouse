@@ -10,7 +10,7 @@ namespace SmartHouse.Models
     public class DeviceManager : IDeviceManager
     {
         //Maybe change data type from List to Dictionary. See the what is better for implementation
-        private List<SmartHouseDevice> _devices=new List<SmartHouseDevice>();
+        protected List<SmartHouseDevice> _devices=new List<SmartHouseDevice>();
 
 
         public void AddDevice(SmartHouseDevice device)
@@ -55,6 +55,13 @@ namespace SmartHouse.Models
             {
                 device.TurnOn();
             }
+        }
+
+        public SmartHouseDevice? GetDeviceById(int deviceId)
+        {
+            var device=_devices.FirstOrDefault(x=>x.DeviceId == deviceId);
+            if (device != null) return device;
+            else return null;
         }
     }
 }
