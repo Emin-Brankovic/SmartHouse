@@ -2,6 +2,7 @@
 using SmartHouse.EntertainmetDevices;
 using SmartHouse.Enums;
 using SmartHouse.Models;
+using SmartHouse.Repository;
 using SmartHouse.SmartHouseSystems;
 
 namespace SmartHouse
@@ -10,6 +11,10 @@ namespace SmartHouse
     {
         static void Main(string[] args)
         {
+            
+            InMemoryRepository.PopulateRepository();
+
+
             //Console.WriteLine("Hello, World!");
 
             //LightSystem lightSystem = new LightSystem();

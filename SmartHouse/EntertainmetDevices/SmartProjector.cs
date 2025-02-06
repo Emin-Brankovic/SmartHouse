@@ -10,8 +10,14 @@ namespace SmartHouse.EntertainmetDevices
 {
     public class SmartProjector : EntertainmentDevice
     {
-        public SmartProjector(string deviceName, List<ConnectivityTypes> connectivityTypes,string brand ,bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand,connection, maxVolume)
+        public SmartProjector(string deviceName, List<ConnectivityTypes> connectivityTypes,string brand, List<StreamingApps> supportedApps, List<string> supportedResolutions,bool builtInSpeakers,
+            int minScreenSize=50,int maxScreenSize=120, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand,connection, maxVolume)
         {
+            SupportedApps = supportedApps;
+            SupportedResolutions = supportedResolutions;
+            MinScreenSize = minScreenSize;
+            MaxScreenSize = maxScreenSize;
+            BuiltInSpeakers = builtInSpeakers;
         }
 
         private int _currentScreenSize;
