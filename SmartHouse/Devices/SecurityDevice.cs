@@ -12,8 +12,8 @@ namespace SmartHouse.Devices
 {
     public class SecurityDevice : SmartHouseDevice
     {
-        public SecurityDevice(string deviceName,string location ,bool connection = true)
-            : base(deviceName, connection)
+        public SecurityDevice(string deviceName,string location,string brand ,bool connection = true)
+            : base(deviceName, brand, connection)
         {
             Location = location;
         }

@@ -9,7 +9,7 @@ namespace SmartHouse.SecurityDevices
 {
     public class SmartLock : SecurityDevice
     {
-        public SmartLock(string deviceName, string location, bool isPINCode=false, bool isFingerPrint = false, bool isRFID = false, bool connection = true) : base(deviceName, location, connection)
+        public SmartLock(string deviceName, string brand, string location, bool isPINCode=false, bool isFingerPrint = false, bool isRFID = false, bool connection = true) : base(deviceName, location, brand ,connection)
         {
             IsPINCode = isPINCode;
             IsFingerPrint = isFingerPrint;

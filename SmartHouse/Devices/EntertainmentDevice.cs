@@ -10,19 +10,33 @@ namespace SmartHouse.Devices
 {
     public class EntertainmentDevice : SmartHouseDevice
     {
-        public EntertainmentDevice(string deviceName, List<ConnectivityTypes> connectivityTypes,bool connection = true,int volume=10,int maxVolume=100,bool isMuted=false)
-            : base(deviceName, connection)
+        public EntertainmentDevice(string deviceName, List<ConnectivityTypes> connectivityTypes,string brand,
+            bool connection = true,int maxVolume=100)
+            : base(deviceName, brand ,connection)
         {
-            CurrentVolume = volume;
             MaxVolume = maxVolume;
-            IsMuted = isMuted;
             ConnectivityTypes = connectivityTypes;
         }
 
-        public int CurrentVolume{ get; set; }
-        public int MaxVolume { get; set; }  
+        private int _currentVolume=20;
+
+        public int CurrentVolume
+        {
+            get => _currentVolume;
+            set
+            {
+                if(value>=0 && value<=MaxVolume)
+                    _currentVolume = value;
+                else if(value<0)
+                    _currentVolume = 0;
+                else if(value > MaxVolume)
+                    _currentVolume = MaxVolume;
+            }
+        }
+        public int MaxVolume { get; set; }
         public bool IsMuted { get; set; }
         public List<ConnectivityTypes> ConnectivityTypes { get;  set; }
+        public string CurrentlyPlaying { get; set; }=string.Empty;
 
     }
 }
