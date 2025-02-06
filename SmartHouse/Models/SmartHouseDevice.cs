@@ -10,11 +10,12 @@ namespace SmartHouse.Models
     public abstract class SmartHouseDevice : ISmartHouseDevice
     {
 
-        public SmartHouseDevice(string deviceName,bool connection=true)
+        public SmartHouseDevice(string deviceName,string brand,bool connection=true)
         {
             DeviceId=_lastDeviceId++;
             DeviceName=deviceName;
             IsConnected = connection;
+            Brand = brand;
         }
 
         public int DeviceId { get; set; }
@@ -22,6 +23,7 @@ namespace SmartHouse.Models
         public bool IsOn { get; set; }
         public bool IsConnected { get; set; }
         private static int _lastDeviceId=1;
+        public string Brand { get; private set; }
 
 
 

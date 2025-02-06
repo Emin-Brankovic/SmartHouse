@@ -10,9 +10,9 @@ namespace SmartHouse.Devices
 {
     public class LightDevice : SmartHouseDevice
     {
-        public LightDevice(string deviceName, bool connection = true,LightColors color=LightColors.White, int brightnes=100,
+        public LightDevice(string deviceName, string brand ,bool connection = true,LightColors color=LightColors.White, int brightnes=100,
             int colorTemperature=3000) 
-            : base(deviceName, connection)
+            : base(deviceName,brand,connection)
         {
             Color = color;
             Brightnes = brightnes;

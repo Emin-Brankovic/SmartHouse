@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Enums
 {
-    public enum ConnectivityTypes
+    public enum EqualizerModes
     {
-        Wired,
-        Bluetooth,
-        WiFi,
-        HDMI,
-        DisplayPort,
-        USBC,
-        MicroUSB,
-        AUX
+        BassBoost,
+        TrebleBoost,
+        Studio,
+        Voice,
+        Concert,
+        Standard
     }
 }
