@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Enums
 {
-    public enum ConnectivityTypes
+    public enum PictureModes
     {
-        Wired,
-        Bluetooth,
-        WiFi,
-        HDMI,
-        DisplayPort,
-        USBC,
-        MicroUSB,
-        AUX
+        Standard,
+        Vivid,
+        Movie,
+        Game,
+        Natural
     }
 }

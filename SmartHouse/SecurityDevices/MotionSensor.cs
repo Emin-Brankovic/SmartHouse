@@ -9,7 +9,7 @@ namespace SmartHouse.SecurityDevices
 {
     public class MotionSensor : SecurityDevice
     {
-        public MotionSensor(string deviceName, string location,int sensitivity,int range ,bool connection = true) : base(deviceName, location, connection)
+        public MotionSensor(string deviceName, string brand, string location,int sensitivity,int range ,bool connection = true) : base(deviceName, location, brand ,connection)
         {
             SensorSensitivity = sensitivity;
             DetectionRange = range;

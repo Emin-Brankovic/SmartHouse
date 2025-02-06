@@ -10,7 +10,8 @@ namespace SmartHouse.SecurityDevices
 {
     public class SecurityCamera : SecurityDevice
     {
-        public SecurityCamera(string deviceName, string location, string resolution, int fps, bool isRecording, int capacity, bool connection = true) : base(deviceName, location, connection)
+        public SecurityCamera(string deviceName, string brand, string location, string resolution, int fps, bool isRecording, 
+            string capacity, bool connection = true) : base(deviceName, location, brand, connection)
         {
             Resolution = resolution;
             FPS = fps;
@@ -23,7 +24,7 @@ namespace SmartHouse.SecurityDevices
         private readonly int MaxFPS = 120;
         public int FPS { get; private set; }
         public bool IsRecording { get; private set; }
-        public int Capacity { get; private set; }
+        public string Capacity { get; private set; }
 
         public void ChangeResolution(string resolution)
         {
