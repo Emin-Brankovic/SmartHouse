@@ -11,17 +11,18 @@ namespace SmartHouse.EntertainmetDevices
 {
     public class SmartTV : EntertainmentDevice
     {
-        public SmartTV(string deviceName, string brand ,List<ConnectivityTypes> connectivityTypes,List<StreamingApps> apps,
-            List<string> sources,List<string> supportedResolutions, int screenSize, bool connection = true, int maxVolume = 100) 
-            : base(deviceName, connectivityTypes, brand, connection, maxVolume)
+        public SmartTV(string deviceName, string brand ,List<ConnectivityTypes> connectivityTypes,List<int> supportedRefreshRates,
+            List<StreamingApps> apps,List<string> sources,List<string> supportedResolutions, int screenSize, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, connection, maxVolume)
         {
             SupportedApps = apps;
             Sources = sources;
             SupportedResolutions = supportedResolutions;
             ScreenSize = screenSize;
+            SupportedRefreshRates = supportedRefreshRates;
         }
 
         public int RefreshRate { get; set; } = 60;
+        public List<int> SupportedRefreshRates { get; set; } = new List<int>();
         public bool IsAdaptiveBrightness { get; set; }
         public PictureModes PictureMode { get; set; } = PictureModes.Standard;
         public int Brightness { get; set; } = 100;
@@ -152,6 +153,10 @@ namespace SmartHouse.EntertainmetDevices
 
         }
 
+        public void ChangeRefreshRate()
+        {
+
+        }
 
     }
 
