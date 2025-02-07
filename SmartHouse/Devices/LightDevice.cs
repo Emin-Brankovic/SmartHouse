@@ -10,15 +10,26 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Devices
 {
+
+    public enum LightDeviceTypes
+    {
+        Lightbulb,
+        LEDstrip,
+        Lamp,
+        All
+    }
+
     public abstract class LightDevice : SmartHouseDevice
     {
-        public LightDevice(string deviceName, string brand ,bool connection = true,LightColors color=LightColors.White, int brightnes=100,
+        public LightDevice(string deviceName, string brand, bool supportsRGB ,LightDeviceTypes deviceType, bool connection = true,LightColors color=LightColors.White, int brightnes=100,
             int colorTemperature=3000) 
             : base(deviceName,brand,connection)
         {
             Color = color;
             Brightnes = brightnes;
             CurrentColorTemperature = 3000;
+            DeviceType = deviceType;
+            SupportsRGB = supportsRGB;
         }
 
         public LightColors Color { get; set; }
@@ -26,10 +37,12 @@ namespace SmartHouse.Devices
         public readonly int MaxColorTemperature = 6500;
         public readonly int MinColorTemperature = 2700; 
         public int CurrentColorTemperature { get; set; }
-
+        public LightDeviceTypes DeviceType { get; set; }
+        public bool SupportsRGB { get; private set; }
 
         public void ChangeLightColor(LightColors color)
         {
+            if (!SupportsRGB) return;
  
             if(Helper.IsDeviceOn(this))
             {

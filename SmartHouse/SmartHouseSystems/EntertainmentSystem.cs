@@ -21,43 +21,90 @@ namespace SmartHouse.SmartHouseSystems
         }
 
 
-        public void MuteAllDevices()
+        public void MuteAllDevices(EntertainmentDeviceTypes deviceType)
         {
-            foreach (var device in _devices)
+            if (EntertainmentDeviceTypes.All == deviceType)
             {
-                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                if (entertainmentDevice!=null && entertainmentDevice.IsOn)
+                foreach (var device in _devices)
                 {
-                    entertainmentDevice.MuteDevice();
+                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                    if (entertainmentDevice!=null && entertainmentDevice.IsOn)
+                    {
+                        entertainmentDevice.MuteDevice();
                    
+                    }
+                }
+            }
+            else
+            {
+                foreach (var device in _devices)
+                {
+                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                    if (entertainmentDevice != null && entertainmentDevice.IsOn && entertainmentDevice.DeviceType==deviceType)
+                    {
+                        entertainmentDevice.MuteDevice();
+
+                    }
                 }
             }
         }
 
-        public void UnmuteAllDevices()
+        public void UnmuteAllDevices(EntertainmentDeviceTypes deviceType)
         {
-            foreach (var device in _devices)
+            if (EntertainmentDeviceTypes.All == deviceType)
             {
-                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                if (entertainmentDevice != null && entertainmentDevice.IsOn)
+                foreach (var device in _devices)
                 {
-                    entertainmentDevice.UnmuteDevice();
-                    Console.WriteLine($"{entertainmentDevice.DeviceName} is now unmuted.");
+                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                    if (entertainmentDevice != null && entertainmentDevice.IsOn)
+                    {
+                        entertainmentDevice.UnmuteDevice();
+
+                    }
+                }
+            }
+            else
+            {
+                foreach (var device in _devices)
+                {
+                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                    if (entertainmentDevice != null && entertainmentDevice.IsOn && entertainmentDevice.DeviceType == deviceType)
+                    {
+                        entertainmentDevice.UnmuteDevice();
+
+                    }
                 }
             }
         }
 
-        public void ChangeVolumeAllDevices(int volume)
+        public void ChangeVolumeAllDevices(int volume, EntertainmentDeviceTypes deviceType)
         {
-            foreach (var device in _devices)
+
+            if (EntertainmentDeviceTypes.All == deviceType)
             {
-                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                if (entertainmentDevice != null && entertainmentDevice.IsOn)
+                foreach (var device in _devices)
                 {
-                    entertainmentDevice.CurrentVolume=volume;
-                    
+                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                    if (entertainmentDevice != null && entertainmentDevice.IsOn)
+                    {
+                        entertainmentDevice.CurrentVolume = volume;
+
+                    }
                 }
             }
+            else
+            {
+                foreach (var device in _devices)
+                {
+                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                    if (entertainmentDevice != null && entertainmentDevice.IsOn && entertainmentDevice.DeviceType == deviceType)
+                    {
+                        entertainmentDevice.CurrentVolume = volume;
+
+                    }
+                }
+            }
+
         }
     }
 }
