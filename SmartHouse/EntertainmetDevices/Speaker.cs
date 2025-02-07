@@ -11,8 +11,8 @@ namespace SmartHouse.EntertainmetDevices
 {
     public class Speaker : EntertainmentDevice
     {
-        public Speaker(string deviceName, string brand ,List<ConnectivityTypes> types,bool multiDevice, bool connection = true, int maxVolume = 100) 
-            : base(deviceName, types, brand, connection, maxVolume)
+        public Speaker(string deviceName, string brand ,List<ConnectivityTypes> types,bool multiDevice, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.Speaker, bool connection = true, int maxVolume = 100) 
+            : base(deviceName, types, brand, deviceType, connection, maxVolume)
         {
             IsMultiDeviceSupport = multiDevice;
         }

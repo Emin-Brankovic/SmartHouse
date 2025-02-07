@@ -13,7 +13,7 @@ namespace SmartHouse.EntertainmetDevices
     public class SmartTV : EntertainmentDevice
     {
         public SmartTV(string deviceName, string brand ,List<ConnectivityTypes> connectivityTypes,List<int> supportedRefreshRates,
-            List<StreamingApps> apps,List<string> sources,List<string> supportedResolutions, List<PictureModes> supportedPictureMode, int screenSize, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, connection, maxVolume)
+            List<StreamingApps> apps,List<string> sources,List<string> supportedResolutions, List<PictureModes> supportedPictureMode, int screenSize, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.SmartTV, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, deviceType, connection, maxVolume)
         {
             SupportedApps = apps;
             Sources = sources;

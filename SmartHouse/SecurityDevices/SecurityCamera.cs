@@ -11,7 +11,7 @@ namespace SmartHouse.SecurityDevices
     public class SecurityCamera : SecurityDevice
     {
         public SecurityCamera(string deviceName, string brand, string location, string resolution, int fps, bool isRecording, 
-            string capacity, bool connection = true) : base(deviceName, location, brand, connection)
+            string capacity, SecurityDeviceTypes deviceType = SecurityDeviceTypes.SecurityCamera, bool connection = true) : base(deviceName, location, brand, deviceType, connection)
         {
             Resolution = resolution;
             FPS = fps;

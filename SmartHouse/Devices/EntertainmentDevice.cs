@@ -9,14 +9,24 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Devices
 {
+
+    public enum EntertainmentDeviceTypes
+    {
+        Speaker,
+        SmartTV,
+        SmartProjector,
+        All
+    }
+
     public abstract class EntertainmentDevice : SmartHouseDevice
     {
         public EntertainmentDevice(string deviceName, List<ConnectivityTypes> connectivityTypes,string brand,
-            bool connection = true,int maxVolume=100)
+            EntertainmentDeviceTypes deviceType, bool connection = true,int maxVolume=100)
             : base(deviceName, brand ,connection)
         {
             MaxVolume = maxVolume;
             ConnectivityTypes = connectivityTypes;
+            DeviceType = deviceType;
         }
 
         private int _currentVolume=20;
@@ -39,7 +49,7 @@ namespace SmartHouse.Devices
         public bool IsMuted { get; private set; }
         public List<ConnectivityTypes> ConnectivityTypes { get;  set; }
         public string CurrentlyPlaying { get; set; }=string.Empty;
-
+        public EntertainmentDeviceTypes DeviceType { get; set; }
 
 
         public void MuteDevice()

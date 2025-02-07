@@ -4,6 +4,7 @@ using SmartHouse.Interfaces;
 using SmartHouse.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,20 +22,36 @@ namespace SmartHouse.SmartHouseSystems
                 throw new Exception("Device not found");
         }
 
-        public void ArmSystem()
+        public void ArmDevices(SecurityDeviceTypes deviceType)
         {
-            foreach (var device in _devices)
+
+            if (SecurityDeviceTypes.All == deviceType)
             {
-                SecurityDevice? securityDevice = device as SecurityDevice;
-                if (securityDevice != null && securityDevice.IsOn)
+                foreach (var device in _devices)
                 {
-                    securityDevice.UpdateDeviceState(SecurityDeviceStates.Armed);
+                    SecurityDevice? securityDevice = device as SecurityDevice;
+                    if (securityDevice != null && securityDevice.IsOn)
+                    {
+                        securityDevice.UpdateDeviceState(SecurityDeviceStates.Armed);
+                    }
+                }
+                Console.WriteLine("Security system armed.");
+            }
+            else
+            {
+                foreach (var device in _devices)
+                {
+                    SecurityDevice? securityDevice = device as SecurityDevice;
+                    if (securityDevice != null && securityDevice.IsOn && securityDevice.DeviceType == deviceType)
+                    {
+                        securityDevice.UpdateDeviceState(SecurityDeviceStates.Armed);
+                        Console.WriteLine($"Device{securityDevice.DeviceName} is armed.");
+                    }
                 }
             }
-            Console.WriteLine("Security system armed.");
         }
 
-        public void DisarmSystem()
+        public void DisarmDevices(SecurityDeviceTypes deviceType)
         {
             foreach (var device in _devices)
             {
@@ -45,6 +62,31 @@ namespace SmartHouse.SmartHouseSystems
                 }
             }
             Console.WriteLine("Security system disarmed.");
+
+            if (SecurityDeviceTypes.All == deviceType)
+            {
+                foreach (var device in _devices)
+                {
+                    SecurityDevice? securityDevice = device as SecurityDevice;
+                    if (securityDevice != null && securityDevice.IsOn)
+                    {
+                        securityDevice.UpdateDeviceState(SecurityDeviceStates.Disarmed);
+                    }
+                }
+                Console.WriteLine("Security system disarmed.");
+            }
+            else
+            {
+                foreach (var device in _devices)
+                {
+                    SecurityDevice? securityDevice = device as SecurityDevice;
+                    if (securityDevice != null && securityDevice.IsOn && securityDevice.DeviceType == deviceType)
+                    {
+                        securityDevice.UpdateDeviceState(SecurityDeviceStates.Disarmed);
+                        Console.WriteLine($"Device{securityDevice.DeviceName} is disarmed.");
+                    }
+                }
+            }
         }
 
     }

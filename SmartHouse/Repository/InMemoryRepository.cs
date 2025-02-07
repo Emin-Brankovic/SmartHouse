@@ -1,9 +1,12 @@
-﻿using SmartHouse.EntertainmetDevices;
+﻿using SmartHouse.ClimateControlDevices;
+using SmartHouse.Devices;
+using SmartHouse.EntertainmetDevices;
 using SmartHouse.Enums;
 using SmartHouse.SecurityDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +41,6 @@ namespace SmartHouse.Repository
             };
 
         }
-
         public static void CreateSmartProjectors()
         {
             SmartProjectors = new List<SmartProjector>()
@@ -50,7 +52,6 @@ namespace SmartHouse.Repository
                   new SmartProjector("Epson Home Cinema 3200 ", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort },"Epson",new List<StreamingApps> { StreamingApps.Netflix,StreamingApps.YouTube}, new List<string> { "1080p", "UHD", "4K"},false),
             };
         }
-
         public static void CreateSpeakers()
         {
             Speakers = new List<Speaker>()
@@ -109,6 +110,43 @@ namespace SmartHouse.Repository
         }
 
 
+        //ClimateControlDevices
+        public static List<AirConditioner> AirConditioners { get; set; } = new List<AirConditioner>();
+        public static List<AirPurifier> AirPurifiers { get; set; } = new List<AirPurifier>();
+        public static List<AirHumidifier> AirAirHumidifiers { get; set; } = new List<AirHumidifier>();
+
+
+        public static void CreateAirConditioners()
+        {
+            AirConditioners = new List<AirConditioner>()
+            {
+                new AirConditioner("Vivax Cool","Vivax",new List<int> {1,2,3,4,5},40,30,true,21),
+                new AirConditioner("Super Fresh","Daikin",new List<int> {1,2,3,4},32,22,true,20),
+                new AirConditioner("LG Air Con","LG",new List<int> {1,2,3,4,5},41,31,true,25),
+                new AirConditioner("WindFree","Samsung",new List<int> {1,2,3,4,5},38,48,true,17),
+                new AirConditioner("R32","Panasonic",new List<int> {1,2,3,4},33,23,true,22)
+            };
+        }
+        public static void CreateAirPurifiers()
+        {
+            AirPurifiers = new List<AirPurifier>()
+            {
+                new AirPurifier("Dyson AirPurifier","Dyson",new List<int> {1,2,3,4,5},22,15,true,10,5,true,20,"Carbon"),
+                new AirPurifier("Vital 200s","Levoit",new List<int> {1,2,3,4,5},20,18,false,12,7,true,15,"Hepa"),
+                new AirPurifier("Pure Air 1","AirDoctor",new List<int> {1,2,3},18,11,false,6,2,false,0,"Carbon"),
+
+            };
+        }
+        public static void CreateAirAirHumidifiers()
+        {
+            AirAirHumidifiers = new List<AirHumidifier>()
+            {
+                new AirHumidifier("Ph3a Purifier","Dyson",new List<int> {1,2,3,4,5},22,15,true,5,5,40,30,1,new List<int> {1,2,3,4,5}),
+                new AirHumidifier("LV600h","Levoit",new List<int> {1,2,3,4,5},22,15,true,4,4,30,55,1,new List<int> {1,2,3,4,5}),
+                new AirHumidifier("Total Comfort","HomeMedics",new List<int> {1,2,3,4,5},22,15,true,3,1,42,52,1,new List<int> {1,2,3,4}),
+                new AirHumidifier("HM311S","Dreo",new List<int> {1,2,3,4,5},22,15,true,2,0.5,30,30,1,new List<int> {1,2,3}),
+            };
+        }
 
 
         public static void PopulateRepository() 
@@ -119,6 +157,9 @@ namespace SmartHouse.Repository
             CreateSpeakers();
             CreateSmartTVs();
             CreateSmartProjectors();
+            CreateAirConditioners();
+            CreateAirPurifiers();
+            CreateAirAirHumidifiers();
         }
     }
 }
