@@ -20,21 +20,21 @@ namespace SmartHouse.Repository
         {
             SmartTVs = new List<SmartTV>()
             {
-                new SmartTV("Neo QLED", "Samsung", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List<int>{ 60,120,144,165 } ,new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.Spotify,StreamingApps.PrimeVideo }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2", "HDMI3" }, new List<string> { "1080p", "UHD", "4K", "4K UHD","8K" }, 50),
+                new SmartTV("Neo QLED", "Samsung", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List<int>{ 60,120,144,165 } ,new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.Spotify,StreamingApps.PrimeVideo }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2", "HDMI3" }, new List<string> { "1080p", "UHD", "4K", "4K UHD","8K" }, new List<PictureModes>{PictureModes.Standard,PictureModes.Natural,PictureModes.Vivid,PictureModes.Game} ,50),
 
                 new SmartTV("U6K", "Hisens", new List<ConnectivityTypes> { ConnectivityTypes.HDMI}, new List<int>{ 60,120,144} 
-                ,new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.DisneyPlus }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD","6K" }, 42),
+                ,new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.DisneyPlus }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD","6K" },  new List<PictureModes>{PictureModes.Standard,PictureModes.Natural,PictureModes.Movie}  ,42),
 
                 new SmartTV("G5", "LG", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }
-                ,new List<int>{120,144,165 },new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.YouTube, StreamingApps.Spotify }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD" }, 55),
+                ,new List<int>{120,144,165 },new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.YouTube, StreamingApps.Spotify }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD" },  new List<PictureModes>{PictureModes.Standard,PictureModes.Vivid,PictureModes.Movie}, 55),
 
-                new SmartTV("D65Q660M2CW", "Telefunken", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List<int>{ 60,120 } , new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K" }, 65),
-
-
-                new SmartTV("Neon LED", "Samsung", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List < int > { 60, 120, 144 }, new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.Spotify }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD" }, 52),
+                new SmartTV("D65Q660M2CW", "Telefunken", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List<int>{ 60,120 } , new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K" },  new List<PictureModes>{PictureModes.Standard,PictureModes.Natural},65),
 
 
-                new SmartTV("58pus8507", "Philips", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List < int > {60}, new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.YouTube}, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD"}, 48)
+                new SmartTV("Neon LED", "Samsung", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List < int > { 60, 120, 144 }, new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.Spotify }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD" },  new List<PictureModes>{PictureModes.Standard,PictureModes.Natural,PictureModes.Vivid,PictureModes.Game} ,52),
+
+
+                new SmartTV("58pus8507", "Philips", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List < int > {60}, new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.YouTube}, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD"},  new List<PictureModes>{PictureModes.Standard,PictureModes.Natural} ,48)
             };
 
         }

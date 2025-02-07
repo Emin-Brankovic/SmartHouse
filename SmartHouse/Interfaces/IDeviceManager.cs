@@ -12,8 +12,8 @@ namespace SmartHouse.Interfaces
         public void AddDevice(SmartHouseDevice device);
         public void RemoveDevice(int deviceId);
         public void RemoveAllDevices();
-        public void TurnOnAllDevicesOn();
-        public void TurnOffAllDevicesOff();
+        public void TurnOnAllDevices();
+        public void TurnOffAllDevices();
         public void ShowDevices();
     }
 }

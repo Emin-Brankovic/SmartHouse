@@ -1,5 +1,6 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
+using SmartHouse.Helpers;
 using SmartHouse.Interfaces;
 using SmartHouse.Models;
 using System;
@@ -13,42 +14,6 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class LightSystem:DeviceManager
     {
-        public void ChangeLightColor(int deviceId,LightColors color)
-        {
-            var lightDevice = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as LightDevice;
-            if (lightDevice != null && lightDevice.IsOn)
-                lightDevice.Color = color;
-            else
-            {
-                Console.WriteLine("Could not change color");
-                return;
-            }
-
-        }
-        public void ChangeLightBrightnes(int deviceId, int brightnesLevel)
-        {
-            var lightDevice = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as LightDevice;
-            if (lightDevice != null && lightDevice.IsOn)
-                lightDevice.Brightnes = brightnesLevel;
-            else
-            {
-                Console.WriteLine("Could not change brightnes");
-                return;
-            }
-        }
-
-        public void ChangeColorTemperature(int deviceId, int temperature)
-        {
-            var lightDevice = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as LightDevice;
-            if (lightDevice != null && lightDevice.IsOn)
-            {
-                if (temperature<=lightDevice.MaxColorTemperature && temperature>=lightDevice.MinColorTemperature)
-                    lightDevice.CurrentColorTemperature=temperature;
-                else
-                    Console.WriteLine("Entered temperature out of range");
-            }
-        }
-
         public LightDevice GetDevice(int deviceId)
         {
             var device = GetDeviceById(deviceId) as LightDevice;
@@ -56,6 +21,54 @@ namespace SmartHouse.SmartHouseSystems
                 return device;
             else
                 throw new Exception("Device not found");
+        }
+
+
+
+        public void ChangeLightColorAllDevices(LightColors color)
+        {
+
+            foreach (var device in _devices)
+            {
+                LightDevice? lightDevice = device as LightDevice;
+                if (lightDevice != null && lightDevice.IsOn)
+                {
+                    lightDevice.ChangeLightColor(color);
+                    Console.WriteLine($"Device{lightDevice.DeviceName} color changed to {color}.");
+                }
+            }
+
+        }
+        public void ChangeLightBrightnes(int brightnesLevel)
+        {
+            foreach (var device in _devices)
+            {
+                LightDevice? lightDevice = device as LightDevice;
+                if (lightDevice != null && lightDevice.IsOn)
+                {
+                    lightDevice.ChangeLightBrightnes(brightnesLevel);
+                    Console.WriteLine($"Device{lightDevice.DeviceName} brightnes level changed to {brightnesLevel}%.");
+                }
+            }
+
+        }
+
+        public void ChangeColorTemperature(int temperature)
+        {
+            foreach (var device in _devices)
+            {
+                LightDevice? lightDevice = device as LightDevice;
+                if (lightDevice != null && lightDevice.IsOn)
+                {
+                    if (temperature <= lightDevice.MaxColorTemperature && temperature >= lightDevice.MinColorTemperature)
+                    {
+                        lightDevice.CurrentColorTemperature = temperature;
+                        Console.WriteLine($"Device{lightDevice.DeviceName} color temperature set to {temperature}K.");
+                    }
+                    else
+                        Console.WriteLine("Entered temperature out of range");
+                }
+            }
         }
 
     }

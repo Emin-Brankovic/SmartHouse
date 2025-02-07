@@ -1,4 +1,5 @@
 ﻿using SmartHouse.Enums;
+using SmartHouse.Helpers;
 using SmartHouse.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Devices
 {
-    public class EntertainmentDevice : SmartHouseDevice
+    public abstract class EntertainmentDevice : SmartHouseDevice
     {
         public EntertainmentDevice(string deviceName, List<ConnectivityTypes> connectivityTypes,string brand,
             bool connection = true,int maxVolume=100)
@@ -31,12 +32,32 @@ namespace SmartHouse.Devices
                     _currentVolume = 0;
                 else if(value > MaxVolume)
                     _currentVolume = MaxVolume;
+                Console.WriteLine($"{DeviceName} volume set to: {_currentVolume}");
             }
         }
-        public int MaxVolume { get; set; }
-        public bool IsMuted { get; set; }
+        private int MaxVolume { get; set; }
+        public bool IsMuted { get; private set; }
         public List<ConnectivityTypes> ConnectivityTypes { get;  set; }
         public string CurrentlyPlaying { get; set; }=string.Empty;
 
+
+
+        public void MuteDevice()
+        {
+            if (Helper.IsDeviceOn(this))
+            {
+                IsMuted = true;
+                Console.WriteLine($"{DeviceName} muted");
+            }
+        }
+
+        public void UnmuteDevice()
+        {
+            if (Helper.IsDeviceOn(this))
+            {
+                IsMuted = false;
+                Console.WriteLine($"{DeviceName} unmuted");
+            }
+        }
     }
 }

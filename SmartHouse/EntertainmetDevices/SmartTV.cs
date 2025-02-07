@@ -1,5 +1,6 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
+using SmartHouse.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +13,20 @@ namespace SmartHouse.EntertainmetDevices
     public class SmartTV : EntertainmentDevice
     {
         public SmartTV(string deviceName, string brand ,List<ConnectivityTypes> connectivityTypes,List<int> supportedRefreshRates,
-            List<StreamingApps> apps,List<string> sources,List<string> supportedResolutions, int screenSize, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, connection, maxVolume)
+            List<StreamingApps> apps,List<string> sources,List<string> supportedResolutions, List<PictureModes> supportedPictureMode, int screenSize, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, connection, maxVolume)
         {
             SupportedApps = apps;
             Sources = sources;
             SupportedResolutions = supportedResolutions;
             ScreenSize = screenSize;
             SupportedRefreshRates = supportedRefreshRates;
+            SupportedPictureMode = supportedPictureMode;
         }
 
         public int RefreshRate { get; set; } = 60;
         public List<int> SupportedRefreshRates { get; set; } = new List<int>();
         public bool IsAdaptiveBrightness { get; set; }
+        public List<PictureModes> SupportedPictureMode { get; set; }= new List<PictureModes>();
         public PictureModes PictureMode { get; set; } = PictureModes.Standard;
         public int Brightness { get; set; } = 100;
         public int Contrast { get; set; } = 50;
@@ -99,63 +102,25 @@ namespace SmartHouse.EntertainmetDevices
 
         public void OpenApp()
         {
-            string userInput=string.Empty;
-            int chosenApp;
-
-            
-
-            for (int i = 0; i <SupportedApps.Count; i++)
-            {
-                Console.WriteLine($"{i+1}. {SupportedApps[i]}");
-            }
-
-            Console.WriteLine("Select App by entering the number");
-
-            Console.WriteLine("----------------------------------------------");
-
-            do
-            {
-                Console.Write("Choose Application: ");
-                userInput = Console.ReadLine();
-            }
-            while (!int.TryParse(userInput, out chosenApp) || chosenApp < 0 || chosenApp >= SupportedApps.Count);
-
-            if (chosenApp <= SupportedApps.Count && chosenApp >= 0)
-                 CurrentApp = SupportedApps[chosenApp].ToString();
+            CurrentApp= Helper.SelectSupported<StreamingApps>(SupportedApps).ToString();
 
         }
 
         public void ChangeResolution()
         {
-            string userInput = string.Empty;
-            int chosenRes;
 
+            var selected = Helper.SelectSupported<string>(SupportedResolutions);
+            if (selected != null)
+                Resolution = selected;
+            else
+                Resolution = SupportedResolutions[0];
 
-
-            for (int i = 0; i < SupportedResolutions.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {SupportedResolutions[i]}");
-            }
-
-            Console.WriteLine("Select resolution by entering the number");
-
-            Console.WriteLine("----------------------------------------------");
-
-            do
-            {
-                Console.Write("Choose resolution: ");
-                userInput = Console.ReadLine();
-            }
-            while (!int.TryParse(userInput, out chosenRes) || chosenRes < 0 || chosenRes >= SupportedResolutions.Count);
-
-            if (chosenRes <= SupportedResolutions.Count && chosenRes >= 0)
-                Resolution = SupportedResolutions[chosenRes-1].ToString();
 
         }
 
         public void ChangeRefreshRate()
         {
-
+            RefreshRate=Helper.SelectSupported<int>(SupportedRefreshRates);
         }
 
     }
