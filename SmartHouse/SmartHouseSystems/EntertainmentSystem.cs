@@ -11,38 +11,6 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class EntertainmentSystem : DeviceManager
     {
-        public void MuteDevice(string deviceName)
-        {
-            var device=_devices.FirstOrDefault(x => x.DeviceName == deviceName) as EntertainmentDevice;
-            if (device != null && device.IsOn)
-            {
-                device.IsMuted= true;
-                Console.WriteLine($"Device muted");
-            }
-        }
-
-        public void UnmuteDevice(string deviceName)
-        {
-            var device = _devices.FirstOrDefault(x => x.DeviceName == deviceName) as EntertainmentDevice;
-            if (device != null && device.IsOn)
-            {
-                device.IsMuted = false;
-                Console.WriteLine($"Device unmuted");
-            }
-        }
-
-        public void ChnageVolume(string deviceName,int volume)
-        {
-            var device = _devices.FirstOrDefault(x => x.DeviceName == deviceName) as EntertainmentDevice;
-            if (device != null && device.IsOn)
-            {
-                if (volume < device.MaxVolume) return;
-
-                device.CurrentVolume = volume;
-                Console.WriteLine($"Device volume: {device.CurrentVolume}");
-            }
-        }
-
         public EntertainmentDevice GetDevice(int deviceId)
         {
             var device = GetDeviceById(deviceId) as EntertainmentDevice;
@@ -50,6 +18,46 @@ namespace SmartHouse.SmartHouseSystems
                 return device;
             else
                 throw new Exception("Device not found");
+        }
+
+
+        public void MuteAllDevices()
+        {
+            foreach (var device in _devices)
+            {
+                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                if (entertainmentDevice!=null && entertainmentDevice.IsOn)
+                {
+                    entertainmentDevice.MuteDevice();
+                   
+                }
+            }
+        }
+
+        public void UnmuteAllDevices()
+        {
+            foreach (var device in _devices)
+            {
+                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                if (entertainmentDevice != null && entertainmentDevice.IsOn)
+                {
+                    entertainmentDevice.UnmuteDevice();
+                    Console.WriteLine($"{entertainmentDevice.DeviceName} is now unmuted.");
+                }
+            }
+        }
+
+        public void ChangeVolumeAllDevices(int volume)
+        {
+            foreach (var device in _devices)
+            {
+                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                if (entertainmentDevice != null && entertainmentDevice.IsOn)
+                {
+                    entertainmentDevice.CurrentVolume=volume;
+                    
+                }
+            }
         }
     }
 }

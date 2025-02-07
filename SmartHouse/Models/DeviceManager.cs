@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.Models
 {
+    //TODO: Add ResetAllDevices method
     public abstract class DeviceManager : IDeviceManager
     {
         //Maybe change data type from List to Dictionary. See the what is better for implementation
@@ -29,19 +30,21 @@ namespace SmartHouse.Models
 
         public void RemoveAllDevices()
         {
-            foreach (var device in _devices)
-            {
-                _devices.Remove(device);
-            }
+                _devices.Clear();
         }
 
         public void ShowDevices()
         {
+            if(_devices.Count < 1 )
+            {
+                Console.WriteLine("No devices registered");
+            }
+
            foreach(var device in _devices)
-                Console.WriteLine(device.DeviceName);
+                Console.WriteLine($"{device.DeviceName} : {device.GetType().Name}");
         }
 
-        public void TurnOffAllDevicesOff()
+        public void TurnOffAllDevices()
         {
             foreach (var device in _devices)
             {
@@ -49,7 +52,7 @@ namespace SmartHouse.Models
             }
         }
 
-        public void TurnOnAllDevicesOn()
+        public void TurnOnAllDevices()
         {
             foreach (var device in _devices)
             {

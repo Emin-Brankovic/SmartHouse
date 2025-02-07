@@ -12,42 +12,6 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class SecuritySystem : DeviceManager
     {
-        public void ShowBatteryLevel(int deviceId)
-        {
-            var device=_devices.FirstOrDefault(x => x.DeviceId == deviceId) as SecurityDevice;
-            if (device != null && device.IsOn)
-                Console.WriteLine($"Battery: {device.BatteryLevel}");
-            else
-                Console.WriteLine("Device not found");
-
-        }
-
-        public void UpdateDeviceLocation(int deviceId,string location)
-        {
-            var device = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as SecurityDevice;
-            if (device != null && device.IsOn)
-            {
-                device.Location = location;
-                Console.WriteLine($"Device location changed to: {device.Location}");
-            }
-            else
-                Console.WriteLine("Device not found");
-
-        }
-
-        public void UpdateDeviceState(int deviceId, SecurityDeviceStates state)
-        {
-            var device = _devices.FirstOrDefault(x => x.DeviceId == deviceId) as SecurityDevice;
-            if (device != null && device.IsOn)
-            {
-                device.State = state;
-                Console.WriteLine($"Device state changed to: {device.State}");
-            }
-            else
-                Console.WriteLine("Device not found");
-
-        }
-
         public SecurityDevice GetDevice(int deviceId)
         {
             var device = GetDeviceById(deviceId) as SecurityDevice;
@@ -56,5 +20,32 @@ namespace SmartHouse.SmartHouseSystems
             else
                 throw new Exception("Device not found");
         }
+
+        public void ArmSystem()
+        {
+            foreach (var device in _devices)
+            {
+                SecurityDevice? securityDevice = device as SecurityDevice;
+                if (securityDevice != null && securityDevice.IsOn)
+                {
+                    securityDevice.UpdateDeviceState(SecurityDeviceStates.Armed);
+                }
+            }
+            Console.WriteLine("Security system armed.");
+        }
+
+        public void DisarmSystem()
+        {
+            foreach (var device in _devices)
+            {
+                SecurityDevice? securityDevice = device as SecurityDevice;
+                if (securityDevice != null && securityDevice.IsOn)
+                {
+                    securityDevice.UpdateDeviceState(SecurityDeviceStates.Disarmed);
+                }
+            }
+            Console.WriteLine("Security system disarmed.");
+        }
+
     }
 }

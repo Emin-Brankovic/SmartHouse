@@ -62,6 +62,7 @@ namespace SmartHouse.Models
             }
         }
 
+        //TODO: Make GetStatus and Reset virtual methods so they can be overriden in the implementation classes
         public void GetStatus()
         {
             Console.WriteLine($"Status for device: {DeviceName}");

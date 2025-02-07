@@ -126,13 +126,13 @@ namespace SmartHouse.EntertainmetDevices
         {
             if(!IsMultiDeviceSupport)
             {
-                Console.WriteLine("Speaker does not support this feature");
+                Console.WriteLine($"Speaker {DeviceName} does not support this feature");
                 return;
             }
 
             if (!speaker.IsMultiDeviceSupport)
             {
-                Console.WriteLine("Speaker does not support this feature");
+                Console.WriteLine($"Speaker {speaker.DeviceName} does not support this feature");
                 return;
             }
 
@@ -148,7 +148,7 @@ namespace SmartHouse.EntertainmetDevices
                 Console.WriteLine($"Speaker: {speaker.DeviceName} connected");
             }
             else
-                Console.WriteLine("Device already connected");
+                Console.WriteLine($"Speaker {speaker.DeviceName}  already connected");
 
 
         }
@@ -158,12 +158,27 @@ namespace SmartHouse.EntertainmetDevices
         {
             if (!IsMultiDeviceSupport)
             {
-                Console.WriteLine("Speaker does not support this feature");
+                Console.WriteLine($"Speaker {DeviceName} does not support this feature");
+                return;
+            }
+
+            if (!speaker.IsMultiDeviceSupport)
+            {
+                Console.WriteLine($"Speaker {speaker.DeviceName} does not support this feature");
                 return;
             }
 
             ConnectedDevices.Remove(speaker);
             Console.WriteLine($"Speaker: {speaker.DeviceName} is disconnected");
+        }
+
+        public void ShowConnectedSpeakers()
+        {
+            Console.WriteLine($"Connected speakers to {DeviceName} : ");
+            foreach (Speaker speaker in ConnectedDevices)
+            {
+                Console.WriteLine(speaker.DeviceName);
+            }
         }
     }
 }
