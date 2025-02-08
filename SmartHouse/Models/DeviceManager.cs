@@ -17,20 +17,25 @@ namespace SmartHouse.Models
         public void AddDevice(SmartHouseDevice device)
         {
            _devices.Add(device);
+            Console.WriteLine($"Device {device.DeviceName} was successfully added ");
         }
 
-        public void RemoveDevice(int deviceId)
+        public void RemoveDevice(string deviceName)
         {
-           var device=_devices.FirstOrDefault(x => x.DeviceId == deviceId);
+           var device=_devices.FirstOrDefault(x => x.DeviceName.ToLower() == deviceName.ToLower());
             if (device != null)
+            {
                 _devices.Remove(device);
+                Console.WriteLine($"Device {deviceName} was successfully removed ");
+            }
             else
-                Console.WriteLine($"Device with ID: {deviceId} was not found as a registred device in your house");
+                Console.WriteLine($"Device with ID: {deviceName} was not found as a registred device in your house");
         }
 
         public void RemoveAllDevices()
         {
-                _devices.Clear();
+            Console.WriteLine("Removing devices");
+            _devices.Clear();
         }
 
         public void ShowDevices()
@@ -60,9 +65,10 @@ namespace SmartHouse.Models
             }
         }
 
-        protected SmartHouseDevice? GetDeviceById(int deviceId)
+        //Znam da se treba dohvatati preko Id uređaja ali zbog jednostavnosti testiranja radim preko imena
+        protected SmartHouseDevice? GetDeviceById(string deviceName)
         {
-            var device=_devices.FirstOrDefault(x=>x.DeviceId == deviceId);
+            var device = _devices.FirstOrDefault(x => x.DeviceName.ToLower() == deviceName.ToLower());
             if (device != null) return device;
             else return null;
         }

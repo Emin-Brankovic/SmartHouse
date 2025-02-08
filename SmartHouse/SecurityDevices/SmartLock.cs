@@ -25,11 +25,13 @@ namespace SmartHouse.SecurityDevices
         public void LockDoor()
         {
             IsLocked = true;
+            Console.WriteLine($"{DeviceName} is unlocked");
         }
 
         public void UnlockDoor()
         {
             IsLocked = false;
+            Console.WriteLine($"{DeviceName} is locked");
         }
     }
 }

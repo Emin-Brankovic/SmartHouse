@@ -56,6 +56,11 @@ namespace SmartHouse.Devices
         {
             if (Helper.IsDeviceOn(this))
             {
+                if (IsMuted)
+                {
+                    Console.WriteLine($"{DeviceName} already muted");
+                    return;
+                }
                 IsMuted = true;
                 Console.WriteLine($"{DeviceName} muted");
             }
@@ -65,9 +70,25 @@ namespace SmartHouse.Devices
         {
             if (Helper.IsDeviceOn(this))
             {
+                if (!IsMuted)
+                {
+                    Console.WriteLine($"{DeviceName} already unmuted");
+                    return;
+                }
+
                 IsMuted = false;
                 Console.WriteLine($"{DeviceName} unmuted");
             }
+        }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+            Console.WriteLine($"Device Type: {DeviceType}");
+            Console.WriteLine($"Current Volume: {(IsMuted ? "Muted" : CurrentVolume.ToString())}");
+            Console.WriteLine($"Max Volume: {MaxVolume}");
+            Console.WriteLine($"Currently Playing: {(string.IsNullOrEmpty(CurrentlyPlaying) ? "Nothing" : CurrentlyPlaying)}");
+            Console.WriteLine($"Connectivity: {string.Join(", ", ConnectivityTypes)}");
         }
     }
 }

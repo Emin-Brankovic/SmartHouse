@@ -89,6 +89,7 @@ namespace SmartHouse.EntertainmetDevices
                     Console.WriteLine("Invalid command. Try again.");
                     break;
             }
+            Console.WriteLine($"{DeviceName} picture mode changed to {PictureMode}");
         }
 
         public void TurnOnAdaptiveBrigness()
@@ -103,7 +104,7 @@ namespace SmartHouse.EntertainmetDevices
         public void OpenApp()
         {
             CurrentApp= Helper.SelectSupported<StreamingApps>(SupportedApps).ToString();
-
+            Console.WriteLine($"{CurrentApp} opened on {DeviceName}");
         }
 
         public void ChangeResolution()
@@ -115,12 +116,15 @@ namespace SmartHouse.EntertainmetDevices
             else
                 Resolution = SupportedResolutions[0];
 
+            Console.WriteLine($"{DeviceName} resolution changed to {Resolution}");
+
 
         }
 
         public void ChangeRefreshRate()
         {
             RefreshRate=Helper.SelectSupported<int>(SupportedRefreshRates);
+            Console.WriteLine($"{DeviceName} refreshrate changed to {RefreshRate}");
         }
 
     }

@@ -2,6 +2,7 @@
 using SmartHouse.Enums;
 using SmartHouse.Interfaces;
 using SmartHouse.Models;
+using SmartHouse.Repository;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,14 +14,27 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class SecuritySystem : DeviceManager
     {
-        public SecurityDevice GetDevice(int deviceId)
+        public SecuritySystem()
+        {
+            InitDevices();
+        }
+
+        public SecurityDevice? GetDevice(string deviceId)
         {
             var device = GetDeviceById(deviceId) as SecurityDevice;
             if (device != null)
                 return device;
             else
-                throw new Exception("Device not found");
+                return null;
         }
+        public void InitDevices()
+        {
+            _devices.AddRange(InMemoryRepository.SecurityCameras);
+            _devices.AddRange(InMemoryRepository.SmartLocks);
+            _devices.AddRange(InMemoryRepository.MotionSensors);
+
+        }
+
 
         public void ArmDevices(SecurityDeviceTypes deviceType)
         {

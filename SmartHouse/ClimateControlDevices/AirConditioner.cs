@@ -11,10 +11,11 @@ namespace SmartHouse.ClimateControlDevices
 {
     public class AirConditioner : ClimateControlDevice
     {
-        public AirConditioner(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel, bool isAutoAdjustEnabled,  double currenrTemperature, ClimateControlDeviceTypes deviceType = ClimateControlDeviceTypes.AirCondition, FiltersStatuses filterStatus =FiltersStatuses.Clean, bool connection = true) 
+        public AirConditioner(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel, bool isAutoAdjustEnabled,  double currenrTemperature,bool hasScheduling, ClimateControlDeviceTypes deviceType = ClimateControlDeviceTypes.AirCondition, FiltersStatuses filterStatus =FiltersStatuses.Clean, bool connection = true) 
             : base(deviceName, brand, fanSpeeds, energyUsage, noiseLevel, isAutoAdjustEnabled, deviceType, filterStatus, connection)
         {
             CurrentTemperature=currenrTemperature;
+            HasScheduling=hasScheduling;
         }
 
         private List<string> Modes { get; set; } = new List<string> { "Cool", "Heat" };
@@ -45,15 +46,15 @@ namespace SmartHouse.ClimateControlDevices
 
             Console.WriteLine($"Current room temperature {CurrentTemperature}");
 
-            Console.WriteLine("Choose desired room temperature: ");
+            Console.Write("Choose desired room temperature between 15-50: ");
 
             do
             {
-                Console.Write("Choice: ");
                 userInputString = Console.ReadLine();
             }
             while (!double.TryParse(userInputString, out userInputStringDouble) || userInputStringDouble < 15 || userInputStringDouble > 50);
 
+            TargetTemperature = userInputStringDouble;
             Console.WriteLine($"Temperature set to {userInputString}");
         }
 

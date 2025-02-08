@@ -1,6 +1,7 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Interfaces;
 using SmartHouse.Models;
+using SmartHouse.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,25 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class ClimateControlSystem : DeviceManager
     {
-        public ClimateControlDevice GetDevice(int deviceId)
+        public ClimateControlSystem()
+        {
+            InitDevices();
+        }
+
+        public ClimateControlDevice? GetDevice(string deviceId)
         {
             var device = GetDeviceById(deviceId) as ClimateControlDevice;
             if (device != null)
                 return device;
             else
-                throw new Exception("Device not found");
+                return null;
+        }
+
+        public void InitDevices()
+        {
+            _devices.AddRange(InMemoryRepository.AirAirHumidifiers);
+            _devices.AddRange(InMemoryRepository.AirConditioners);
+            _devices.AddRange(InMemoryRepository.AirPurifiers);
         }
 
         public void ChangeFanSpeedOfAllDevices(int fanSpeed,ClimateControlDeviceTypes deviceType)

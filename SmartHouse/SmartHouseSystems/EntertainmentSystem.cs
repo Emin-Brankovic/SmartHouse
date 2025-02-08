@@ -1,6 +1,7 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Interfaces;
 using SmartHouse.Models;
+using SmartHouse.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,25 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class EntertainmentSystem : DeviceManager
     {
-        public EntertainmentDevice GetDevice(int deviceId)
+        public EntertainmentSystem()
+        {
+            InitDevices();
+        }
+
+        public EntertainmentDevice GetDevice(string deviceId)
         {
             var device = GetDeviceById(deviceId) as EntertainmentDevice;
             if (device != null)
                 return device;
             else
                 throw new Exception("Device not found");
+        }
+
+        public void InitDevices()
+        {
+            _devices.AddRange(InMemoryRepository.SmartTVs);
+            _devices.AddRange(InMemoryRepository.SmartProjectors);
+            _devices.AddRange(InMemoryRepository.Speakers);
         }
 
 

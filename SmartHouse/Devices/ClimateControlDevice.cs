@@ -1,4 +1,5 @@
 ﻿using SmartHouse.Enums;
+using SmartHouse.Helpers;
 using SmartHouse.Models;
 using System;
 using System.Collections.Generic;
@@ -30,12 +31,6 @@ namespace SmartHouse.Devices
             DeviceType = deviceType;
         }
 
-        //public double CurrentTemperature { get; private set; }
-        //public double TargetTemperature { get; private set; }
-        //public double CurrentHumidity { get; private set; }
-        //public double TargetHumidity { get; private set; }
-
-
         public List<int> FanSpeeds { get; private set; }
         public int CurrentFanSpeed { get; set; }
         public double EnergyUsage { get; private set; } //kWh
@@ -43,5 +38,13 @@ namespace SmartHouse.Devices
         public bool IsAutoAdjustEnabled { get; private set; }
         public FiltersStatuses FilterStatus { get; private set; }
         public ClimateControlDeviceTypes DeviceType { get; set; }
+
+        public void ChangeFanSpeed()
+        {
+            var selected = Helper.SelectSupported<int>(FanSpeeds);
+            CurrentFanSpeed= selected;
+
+            Console.WriteLine($"{DeviceName} fan speed changed to {CurrentFanSpeed}");
+        }
     }
 }

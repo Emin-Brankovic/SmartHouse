@@ -63,11 +63,12 @@ namespace SmartHouse.Models
         }
 
         //TODO: Make GetStatus and Reset virtual methods so they can be overriden in the implementation classes
-        public void GetStatus()
+        public virtual void GetStatus()
         {
             Console.WriteLine($"Status for device: {DeviceName}");
+            Console.WriteLine($"Brand: {Brand}");
             Console.WriteLine($"Power: {(IsOn ? "On" : "Off")}");
-            Console.WriteLine($"Connected: {(IsConnected ? "Connected" : "Not Connected")}");
+            Console.WriteLine($"Network: {(IsConnected ? "Connected" : "Not Connected")}");
         }
 
         public void Reset() 

@@ -34,7 +34,7 @@ namespace SmartHouse.Devices
         public SecurityDeviceStates State { get; private set; } = SecurityDeviceStates.Disarmed;
         public SecurityDeviceTypes DeviceType { get; set; }
 
-        public void ShowBatteryLevel(int deviceId)
+        public void ShowBatteryLevel()
         {
             if (Helper.IsDeviceOn(this))
                 Console.WriteLine($"Battery: {BatteryLevel}");

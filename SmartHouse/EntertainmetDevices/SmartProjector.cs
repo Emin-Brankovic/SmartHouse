@@ -47,6 +47,8 @@ namespace SmartHouse.EntertainmetDevices
 
         public void ChangeResolution()
         {
+            Console.WriteLine("Change resolution");
+
             var selected = Helper.SelectSupported<string>(SupportedResolutions);
             if (selected != null)
                 Resolution = selected;
@@ -57,9 +59,18 @@ namespace SmartHouse.EntertainmetDevices
 
         public void OpenApp()
         {
+            Console.WriteLine("Open app");
             CurrentApp = Helper.SelectSupported<StreamingApps>(SupportedApps).ToString();
         }
 
+        public void ChangeScreenSize(int screenSize)
+        {
+            if(screenSize >= MinScreenSize && screenSize <= MaxScreenSize)
+            {
+                _currentScreenSize=screenSize;
+                Console.WriteLine($"{DeviceName} screen size changed to {screenSize}'' ");
+            }
+        }
 
     }
 }

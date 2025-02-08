@@ -119,6 +119,7 @@ namespace SmartHouse.EntertainmetDevices
                     Console.WriteLine("Invalid command. Try again.");
                     break;
             }
+            Console.WriteLine($"{DeviceName} equalizer mode changed to {EqualizerMode}");
         }
 
 

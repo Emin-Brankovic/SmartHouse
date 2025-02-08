@@ -15,9 +15,9 @@ namespace SmartHouse.Repository
     public static class InMemoryRepository
     {
         //Entertainment devices
-        public static List<SmartTV>? SmartTVs { get; set; }=new List<SmartTV>();
-        public static List<SmartProjector>? SmartProjectors { get; set; } =new List<SmartProjector>();
-        public static List<Speaker>? Speakers { get; set; } = new List<Speaker>();
+        public static List<SmartTV>? SmartTVs { get; set; }
+        public static List<SmartProjector>? SmartProjectors { get; set; }
+        public static List<Speaker>? Speakers { get; set; }
 
         public static void CreateSmartTVs()
         {
@@ -74,18 +74,18 @@ namespace SmartHouse.Repository
 
 
         //SecurityDevices
-        public static List<MotionSensor> MotionSensors { get; set; } = new List<MotionSensor>();
-        public static List<SecurityCamera>? SecurityCameras { get; set; } =new List<SecurityCamera>();
-        public static List<SmartLock> SmartLocks { get; set; } = new List<SmartLock>();
+        public static List<MotionSensor>? MotionSensors { get; set; } 
+        public static List<SecurityCamera>? SecurityCameras { get; set; } 
+        public static List<SmartLock>? SmartLocks { get; set; }
 
         public static void CreateSecurityCameras()
         {
             SecurityCameras = new List<SecurityCamera>()
             {
-                new SecurityCamera("Tapo Wire-Free","TP-Link","Garage","2K",30,false,"2TB"),
-                new SecurityCamera("Tapo C120","TP-Link","Kitchen","2K",30,false,"1TB"),
-                new SecurityCamera("Nest Doorbell","Google","Front door","1080p",60,false,"512GB"),
-                new SecurityCamera("Floodlight Cam E340","Eufy","Backyard","2K",30,false,"3TB"),
+                new SecurityCamera("Tapo Wire-Free","TP-Link","Garage",new List<string> { "1080p", "UHD", "2K"},30,false,"2TB"),
+                new SecurityCamera("Tapo C120","TP-Link","Kitchen",new List<string> { "1080p", "UHD", "2K"},30,false,"1TB"),
+                new SecurityCamera("Nest Doorbell","Google","Front door",new List < string > {"480p","720p","1080p",},60,false,"512GB"),
+                new SecurityCamera("Floodlight Cam E340","Eufy","Backyard",new List < string > { "720p", "1080p", "UHD", "2K" },30,false,"3TB"),
             };
         }
         public static void CreateSmartLocks() 
@@ -111,20 +111,20 @@ namespace SmartHouse.Repository
 
 
         //ClimateControlDevices
-        public static List<AirConditioner> AirConditioners { get; set; } = new List<AirConditioner>();
-        public static List<AirPurifier> AirPurifiers { get; set; } = new List<AirPurifier>();
-        public static List<AirHumidifier> AirAirHumidifiers { get; set; } = new List<AirHumidifier>();
+        public static List<AirConditioner>? AirConditioners { get; set; } 
+        public static List<AirPurifier>? AirPurifiers { get; set; } 
+        public static List<AirHumidifier>? AirAirHumidifiers { get; set; } 
 
 
         public static void CreateAirConditioners()
         {
             AirConditioners = new List<AirConditioner>()
             {
-                new AirConditioner("Vivax Cool","Vivax",new List<int> {1,2,3,4,5},40,30,true,21),
-                new AirConditioner("Super Fresh","Daikin",new List<int> {1,2,3,4},32,22,true,20),
-                new AirConditioner("LG Air Con","LG",new List<int> {1,2,3,4,5},41,31,true,25),
-                new AirConditioner("WindFree","Samsung",new List<int> {1,2,3,4,5},38,48,true,17),
-                new AirConditioner("R32","Panasonic",new List<int> {1,2,3,4},33,23,true,22)
+                new AirConditioner("Vivax Cool","Vivax",new List<int> {1,2,3,4,5},40,30,true,21,true),
+                new AirConditioner("Super Fresh","Daikin",new List<int> {1,2,3,4},32,22,true,20, true),
+                new AirConditioner("LG Air Con","LG",new List<int> {1,2,3,4,5},41,31,true,25,false),
+                new AirConditioner("WindFree","Samsung",new List<int> {1,2,3,4,5},38,48,true,17,false),
+                new AirConditioner("R32","Panasonic",new List<int> {1,2,3,4},33,23,true,22,true)
             };
         }
         public static void CreateAirPurifiers()
@@ -148,6 +148,23 @@ namespace SmartHouse.Repository
             };
         }
 
+        //LighDevices
+        public static List<LightDevice>? LightDevices { get; set; }
+
+        public static void CreateLightDevices()
+        {
+            LightDevices = new List<LightDevice>()
+            {
+                new LightDevice("Hue","Philips",true,LightDeviceTypes.Lightbulb),
+                new LightDevice("Hue White","Philips",false,LightDeviceTypes.Lightbulb),
+                new LightDevice("Govee RGBIC LED Strip","Govee",true,LightDeviceTypes.LEDstrip),
+                new LightDevice("Govee RGBIC LED Strip","Govee",true,LightDeviceTypes.LEDstrip),
+                new LightDevice("Path light","Ring",true,LightDeviceTypes.Lamp),
+                new LightDevice("Path light","Ring",true,LightDeviceTypes.Lamp),
+                new LightDevice("Path light","Ring",true,LightDeviceTypes.Lamp),
+            };
+        }
+
 
         public static void PopulateRepository() 
         {
@@ -160,6 +177,7 @@ namespace SmartHouse.Repository
             CreateAirConditioners();
             CreateAirPurifiers();
             CreateAirAirHumidifiers();
+            CreateLightDevices();
         }
     }
 }

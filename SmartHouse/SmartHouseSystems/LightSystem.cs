@@ -3,6 +3,7 @@ using SmartHouse.Enums;
 using SmartHouse.Helpers;
 using SmartHouse.Interfaces;
 using SmartHouse.Models;
+using SmartHouse.Repository;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,15 +15,24 @@ namespace SmartHouse.SmartHouseSystems
 {
     public class LightSystem:DeviceManager
     {
-        public LightDevice GetDevice(int deviceId)
+        public LightSystem()
         {
-            var device = GetDeviceById(deviceId) as LightDevice;
+            InitDevices();
+        }
+
+        public LightDevice? GetDevice(string deviceName)
+        {
+            var device = GetDeviceById(deviceName) as LightDevice;
             if (device != null)
                 return device;
             else
-                throw new Exception("Device not found");
+                return null;
         }
 
+        public void InitDevices()
+        {
+            _devices.AddRange(InMemoryRepository.LightDevices);
+        }
 
 
         public void ChangeLightColorAllDevices(LightColors color,LightDeviceTypes deviceType)
@@ -36,7 +46,7 @@ namespace SmartHouse.SmartHouseSystems
                     if (lightDevice != null && lightDevice.IsOn && lightDevice.SupportsRGB)
                     {
                         lightDevice.ChangeLightColor(color);
-                        Console.WriteLine($"Device{lightDevice.DeviceName} color changed to {color}.");
+                        //Console.WriteLine($"Device{lightDevice.DeviceName} color changed to {color}.");
                     }
                 }
             }
@@ -48,13 +58,13 @@ namespace SmartHouse.SmartHouseSystems
                     if (lightDevice != null && lightDevice.IsOn && lightDevice.DeviceType == deviceType && lightDevice.SupportsRGB)
                     {
                         lightDevice.ChangeLightColor(color);
-                        Console.WriteLine($"Device{lightDevice.DeviceName} color changed to {color}.");
+                        //Console.WriteLine($"Device{lightDevice.DeviceName} color changed to {color}.");
                     }
                 }
             }
 
         }
-        public void ChangeLightBrightnes(int brightnesLevel,LightDeviceTypes deviceType)
+        public void ChangeLightBrightness(int brightnesLevel,LightDeviceTypes deviceType)
         {
 
             if (LightDeviceTypes.All == deviceType)
@@ -64,8 +74,8 @@ namespace SmartHouse.SmartHouseSystems
                     LightDevice? lightDevice = device as LightDevice;
                     if (lightDevice != null && lightDevice.IsOn)
                     {
-                        lightDevice.ChangeLightBrightnes(brightnesLevel);
-                        Console.WriteLine($"Device{lightDevice.DeviceName} brightnes level changed to {brightnesLevel}%.");
+                        lightDevice.ChangeLightBrightness(brightnesLevel);
+                        //Console.WriteLine($"Device{lightDevice.DeviceName} brightnes level changed to {brightnesLevel}%.");
                     }
                 }
             }
@@ -76,8 +86,8 @@ namespace SmartHouse.SmartHouseSystems
                     LightDevice? lightDevice = device as LightDevice;
                     if (lightDevice != null && lightDevice.IsOn && lightDevice.DeviceType == deviceType)
                     {
-                        lightDevice.ChangeLightBrightnes(brightnesLevel);
-                        Console.WriteLine($"Device{lightDevice.DeviceName} brightnes level changed to {brightnesLevel}%.");
+                        lightDevice.ChangeLightBrightness(brightnesLevel);
+                        //Console.WriteLine($"Device{lightDevice.DeviceName} brightnes level changed to {brightnesLevel}%.");
                     }
                 }
             }
@@ -95,8 +105,8 @@ namespace SmartHouse.SmartHouseSystems
                     {
                         if (temperature <= lightDevice.MaxColorTemperature && temperature >= lightDevice.MinColorTemperature)
                         {
-                            lightDevice.CurrentColorTemperature = temperature;
-                            Console.WriteLine($"Device{lightDevice.DeviceName} color temperature set to {temperature}K.");
+                            lightDevice.ChangeColorTemperature(temperature);
+                           // Console.WriteLine($"Device{lightDevice.DeviceName} color temperature set to {temperature}K.");
                         }
                         else
                             Console.WriteLine("Entered temperature out of range");
@@ -112,7 +122,7 @@ namespace SmartHouse.SmartHouseSystems
                     {
                         if (temperature <= lightDevice.MaxColorTemperature && temperature >= lightDevice.MinColorTemperature)
                         {
-                            lightDevice.CurrentColorTemperature = temperature;
+                            lightDevice.ChangeColorTemperature(temperature);
                             Console.WriteLine($"Device{lightDevice.DeviceName} color temperature set to {temperature}K.");
                         }
                         else

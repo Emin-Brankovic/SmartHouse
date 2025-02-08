@@ -19,7 +19,7 @@ namespace SmartHouse.Devices
         All
     }
 
-    public abstract class LightDevice : SmartHouseDevice
+    public class LightDevice : SmartHouseDevice
     {
         public LightDevice(string deviceName, string brand, bool supportsRGB ,LightDeviceTypes deviceType, bool connection = true,LightColors color=LightColors.White, int brightnes=100,
             int colorTemperature=3000) 
@@ -32,12 +32,12 @@ namespace SmartHouse.Devices
             SupportsRGB = supportsRGB;
         }
 
-        public LightColors Color { get; set; }
-        public int Brightnes { get; set; }
+        public LightColors Color { get; private set; }
+        public int Brightnes { get; private set; }
         public readonly int MaxColorTemperature = 6500;
         public readonly int MinColorTemperature = 2700; 
-        public int CurrentColorTemperature { get; set; }
-        public LightDeviceTypes DeviceType { get; set; }
+        public int CurrentColorTemperature { get; private set; }
+        public LightDeviceTypes DeviceType { get; private set; }
         public bool SupportsRGB { get; private set; }
 
         public void ChangeLightColor(LightColors color)
@@ -47,11 +47,11 @@ namespace SmartHouse.Devices
             if(Helper.IsDeviceOn(this))
             {
                 Color = color;
-                Console.WriteLine($"Color set to {color}.");
+                Console.WriteLine($"Device {DeviceName} color changed to {color}.");
             }
 
         }
-        public void ChangeLightBrightnes(int brightnesLevel)
+        public void ChangeLightBrightness(int brightnesLevel)
         {
 
             if (Helper.IsDeviceOn(this))
@@ -59,17 +59,17 @@ namespace SmartHouse.Devices
                 if(brightnesLevel>=0 &&  brightnesLevel<=100)
                 {
                     Brightnes = brightnesLevel;
-                    Console.WriteLine($"Brightness set to {brightnesLevel}.");
+                    Console.WriteLine($"Device {DeviceName} brightness level changed to {brightnesLevel}%.");
                 }
                 else if(brightnesLevel<0)
                 {
                     Brightnes = 0;
-                    Console.WriteLine($"Brightness set to 0.");
+                    Console.WriteLine($"Device {DeviceName} brightnes level changed to 0%.");
                 }
                 else if (brightnesLevel > 100)
                 {
                     Brightnes = 100;
-                    Console.WriteLine($"Brightness set to 100.");
+                    Console.WriteLine($"Device {DeviceName} brightnes level changed to 100%.");
                 }
 
             }
@@ -84,11 +84,21 @@ namespace SmartHouse.Devices
                 if (temperature <=MaxColorTemperature && temperature >= MinColorTemperature)
                 {
                     CurrentColorTemperature = temperature;
-                    Console.WriteLine($"Color temperature set to {CurrentColorTemperature}K.");
+                    Console.WriteLine($"Device {DeviceName} color temperature set to {temperature}K.");
                 }
                 else
                     Console.WriteLine("Entered temperature out of range");
             }
+        }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+            Console.WriteLine($"Device Type: {DeviceType}");
+            Console.WriteLine($"Color: {Color}");
+            Console.WriteLine($"Brightness: {Brightnes}%");
+            Console.WriteLine($"Color Temperature: {CurrentColorTemperature}K (Range: {MinColorTemperature}K - {MaxColorTemperature}K)");
+            Console.WriteLine($"RGB Support: {(SupportsRGB ? "Yes" : "No")}");
         }
 
     }

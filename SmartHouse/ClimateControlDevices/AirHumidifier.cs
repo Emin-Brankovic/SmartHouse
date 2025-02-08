@@ -31,23 +31,23 @@ namespace SmartHouse.ClimateControlDevices
         public List<int> MistOutputLevels { get; private set; }
 
 
-        public void SetTargetHumidity(double humidity)
+        public void SetTargetHumidity()
         {
             string userInputString = string.Empty;
             double userInputStringDouble = default;
 
             do
             {
-                Console.Write("Choice: ");
+                Console.Write("Air humiditiy can be set between 30-70: ");
                 userInputString = Console.ReadLine();
             }
             while (!double.TryParse(userInputString, out userInputStringDouble) || userInputStringDouble < 30 || userInputStringDouble > 70);
 
-            TargetHumidity = humidity;
-            Console.WriteLine($"{DeviceName} target humidity set to {humidity}%.");
+            TargetHumidity = userInputStringDouble;
+            Console.WriteLine($"{DeviceName} target humidity set to {userInputStringDouble}%.");
         }
 
-        public void SetMistOutput(int level)
+        public void SetMistOutput()
         {
             MistOutputLevel = Helper.SelectSupported<int>(MistOutputLevels);
         }

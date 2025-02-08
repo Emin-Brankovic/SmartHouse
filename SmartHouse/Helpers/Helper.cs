@@ -40,7 +40,7 @@ namespace SmartHouse.Helpers
                 Console.Write("Choice: ");
                 userInput = Console.ReadLine();
             }
-            while (!int.TryParse(userInput, out chosenValue) || chosenValue < 1 || chosenValue >= supported.Count);
+            while (!int.TryParse(userInput, out chosenValue) || chosenValue < 1 || chosenValue > supported.Count);
 
             
             return  supported[chosenValue - 1];
