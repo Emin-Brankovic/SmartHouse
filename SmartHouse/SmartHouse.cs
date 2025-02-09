@@ -4,11 +4,6 @@ using SmartHouse.EntertainmetDevices;
 using SmartHouse.Enums;
 using SmartHouse.SecurityDevices;
 using SmartHouse.SmartHouseSystems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse
 {
@@ -18,7 +13,7 @@ namespace SmartHouse
 
         public static EntertainmentSystem entertainmentSystem { get; set; } = new EntertainmentSystem();
         public static SecuritySystem securitySystem { get; set; } = new SecuritySystem();
-        public  static ClimateControlSystem climateControlSystem { get; set; } = new ClimateControlSystem();
+        public static ClimateControlSystem climateControlSystem { get; set; } = new ClimateControlSystem();
 
         public static void LightSystemFunctionalities()
         {
@@ -29,7 +24,7 @@ namespace SmartHouse
             Console.WriteLine("----------------------------------");
             lightSystem.ShowDevices();
             Console.WriteLine("----------------------------------");
-            lightSystem.ChangeColorTemperature(4000, LightDeviceTypes.All);
+            lightSystem.ChangeColorTemperatureOnDevices(4000, LightDeviceTypes.All);
             Console.WriteLine("----------------------------------");
             lightSystem.ChangeLightBrightnessOnDevices(85, LightDeviceTypes.Lightbulb);
             Console.WriteLine("----------------------------------");
@@ -62,13 +57,13 @@ namespace SmartHouse
             Console.WriteLine("----------------------------------");
             entertainmentSystem.ShowDevices();
             Console.WriteLine("----------------------------------");
-            entertainmentSystem.ChangeVolumeAllDevices(21, EntertainmentDeviceTypes.All);
+            entertainmentSystem.ChangeVolumeDevices(21, EntertainmentDeviceTypes.All);
             Console.WriteLine("----------------------------------");
-            entertainmentSystem.MuteAllDevices(EntertainmentDeviceTypes.All);
+            entertainmentSystem.MuteDevices(EntertainmentDeviceTypes.All);
             Console.WriteLine("----------------------------------");
-            entertainmentSystem.UnmuteAllDevices(EntertainmentDeviceTypes.Speaker);
+            entertainmentSystem.UnmuteDevices(EntertainmentDeviceTypes.Speaker);
             Console.WriteLine("----------------------------------");
-            entertainmentSystem.UnmuteAllDevices(EntertainmentDeviceTypes.SmartTV);
+            entertainmentSystem.UnmuteDevices(EntertainmentDeviceTypes.SmartTV);
             Console.WriteLine("----------------------------------");
 
             Console.WriteLine("=====Smart TV Functionalities=====");
@@ -242,9 +237,9 @@ namespace SmartHouse
             Console.WriteLine("----------------------------------");
             climateControlSystem.ShowDevices();
             Console.WriteLine("----------------------------------");
-            climateControlSystem.ChangeFanSpeedOfAllDevices(2, ClimateControlDeviceTypes.All);
+            climateControlSystem.ChangeFanSpeedOfDevices(2, ClimateControlDeviceTypes.All);
             Console.WriteLine("----------------------------------");
-            climateControlSystem.ChangeFanSpeedOfAllDevices(3, ClimateControlDeviceTypes.Purifier);
+            climateControlSystem.ChangeFanSpeedOfDevices(3, ClimateControlDeviceTypes.Purifier);
             Console.WriteLine("----------------------------------");
 
             Console.WriteLine("=====Air Conditioner Functionalities=====");
@@ -300,7 +295,7 @@ namespace SmartHouse
                 Console.WriteLine("----------------------------------");
                 Console.WriteLine($"Current humidity {airHumidifier.CurrentHumidity}");
                 airHumidifier.SetTargetHumidity();
-                Console.WriteLine($"Target humidity {airHumidifier.TargetHumidity}");;
+                Console.WriteLine($"Target humidity {airHumidifier.TargetHumidity}"); ;
                 Console.WriteLine("----------------------------------");
                 airHumidifier.ShowWaterLevel();
                 Console.WriteLine("----------------------------------");

@@ -1,19 +1,14 @@
 ﻿using SmartHouse.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.Models
 {
     public abstract class SmartHouseDevice : ISmartHouseDevice
     {
 
-        public SmartHouseDevice(string deviceName,string brand,bool connection=true)
+        public SmartHouseDevice(string deviceName, string brand, bool connection = true)
         {
-            DeviceId=_lastDeviceId++;
-            DeviceName=deviceName;
+            DeviceId = _lastDeviceId++;
+            DeviceName = deviceName;
             IsConnected = connection;
             Brand = brand;
         }
@@ -24,18 +19,18 @@ namespace SmartHouse.Models
         public bool IsConnected { get; private set; }
         public string Brand { get; private set; }
 
-        private static int _lastDeviceId=1;
+        private static int _lastDeviceId = 1;
 
 
         public void Connect()
         {
 
-            if(!IsOn) return;
+            if (!IsOn) return;
 
             if (!IsConnected)
             {
                 Console.Write("Connecting ");
-                for (int i = 0; i < new Random().Next(5,20); i++)
+                for (int i = 0; i < new Random().Next(5, 20); i++)
                 {
                     Console.Write(".");
                     Thread.Sleep(300);
@@ -62,7 +57,6 @@ namespace SmartHouse.Models
             }
         }
 
-        //TODO: Make GetStatus and Reset virtual methods so they can be overriden in the implementation classes
         public virtual void GetStatus()
         {
             Console.WriteLine($"Status for device: {DeviceName}");
@@ -71,10 +65,10 @@ namespace SmartHouse.Models
             Console.WriteLine($"Network: {(IsConnected ? "Connected" : "Not Connected")}");
         }
 
-        public void Reset() 
+        public void Reset()
         {
-           IsOn = false;
-           IsConnected = false;
+            IsOn = false;
+            IsConnected = false;
         }
 
         public void TurnOff()
@@ -85,7 +79,7 @@ namespace SmartHouse.Models
 
         public void TurnOn()
         {
-           IsOn = true;
+            IsOn = true;
             Console.WriteLine($"{DeviceName} is on");
         }
 

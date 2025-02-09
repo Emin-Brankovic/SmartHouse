@@ -1,10 +1,4 @@
 ﻿using SmartHouse.Models;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.Helpers
 {
@@ -13,11 +7,11 @@ namespace SmartHouse.Helpers
         public static bool IsDeviceOn(SmartHouseDevice device)
         {
             if (device.IsOn)
-                return true ;
+                return true;
             else
             {
                 Console.WriteLine($"Device is off");
-                return false ;
+                return false;
             }
         }
 
@@ -41,8 +35,8 @@ namespace SmartHouse.Helpers
             }
             while (!int.TryParse(userInput, out chosenValue) || chosenValue < 1 || chosenValue > supported.Count);
 
-            
-            return  supported[chosenValue - 1];
+
+            return supported[chosenValue - 1];
         }
 
     }

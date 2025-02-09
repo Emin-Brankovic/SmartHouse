@@ -1,18 +1,13 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
 using SmartHouse.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.EntertainmetDevices
 {
     public class SmartProjector : EntertainmentDevice
     {
-        public SmartProjector(string deviceName, List<ConnectivityTypes> connectivityTypes, string brand, List<StreamingApps> supportedApps, List<string> supportedResolutions, bool builtInSpeakers, EntertainmentDeviceTypes deviceType=EntertainmentDeviceTypes.SmartProjector,
-            int minScreenSize=50,int maxScreenSize=120, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand,deviceType,connection, maxVolume)
+        public SmartProjector(string deviceName, List<ConnectivityTypes> connectivityTypes, string brand, List<StreamingApps> supportedApps, List<string> supportedResolutions, bool builtInSpeakers, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.SmartProjector,
+            int minScreenSize = 50, int maxScreenSize = 120, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, deviceType, connection, maxVolume)
         {
             SupportedApps = supportedApps;
             SupportedResolutions = supportedResolutions;
@@ -22,14 +17,16 @@ namespace SmartHouse.EntertainmetDevices
         }
 
         private int _currentScreenSize;
-            
+
 
         public int Brightness { get; private set; } = 100;
         public string Resolution { get; private set; } = "1080p";
-        public int MinScreenSize { get; private set; } 
-        public int MaxScreenSize { get; private set; } 
-        public int CurrentScreenSize { get=>_currentScreenSize;
-            set 
+        public int MinScreenSize { get; private set; }
+        public int MaxScreenSize { get; private set; }
+        public int CurrentScreenSize
+        {
+            get => _currentScreenSize;
+            set
             {
                 if (value >= MinScreenSize && value <= MaxScreenSize)
                     _currentScreenSize = value;
@@ -38,7 +35,8 @@ namespace SmartHouse.EntertainmetDevices
                 else if (value > MaxScreenSize)
                     _currentScreenSize = MaxScreenSize;
 
-            } }
+            }
+        }
         public bool BuiltInSpeakers { get; private set; }
         public string CurrentApp { get; private set; } = string.Empty;
         public List<StreamingApps> SupportedApps { get; private set; } = new List<StreamingApps>();
@@ -65,9 +63,9 @@ namespace SmartHouse.EntertainmetDevices
 
         public void ChangeScreenSize(int screenSize)
         {
-            if(screenSize >= MinScreenSize && screenSize <= MaxScreenSize)
+            if (screenSize >= MinScreenSize && screenSize <= MaxScreenSize)
             {
-                _currentScreenSize=screenSize;
+                _currentScreenSize = screenSize;
                 Console.WriteLine($"{DeviceName} screen size changed to {screenSize}'' ");
             }
         }

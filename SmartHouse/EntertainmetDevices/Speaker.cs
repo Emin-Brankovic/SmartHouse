@@ -1,17 +1,11 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.EntertainmetDevices
 {
     public class Speaker : EntertainmentDevice
     {
-        public Speaker(string deviceName, string brand ,List<ConnectivityTypes> types,bool multiDevice, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.Speaker, bool connection = true, int maxVolume = 100) 
+        public Speaker(string deviceName, string brand, List<ConnectivityTypes> types, bool multiDevice, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.Speaker, bool connection = true, int maxVolume = 100)
             : base(deviceName, types, brand, deviceType, connection, maxVolume)
         {
             IsMultiDeviceSupport = multiDevice;
@@ -21,17 +15,18 @@ namespace SmartHouse.EntertainmetDevices
         private int _treble = 50;
         private int _mid = 50;
 
-        public int Bass { 
-            get=> _bass  ; 
+        public int Bass
+        {
+            get => _bass;
             set
             {
-                if(value>=0 && value <= 100)
+                if (value >= 0 && value <= 100)
                     _bass = value;
-                else if(value<0)
+                else if (value < 0)
                     _bass = 0;
                 else if (value > 100)
                     _bass = 100;
-            } 
+            }
         }
 
         public int Treble
@@ -79,15 +74,15 @@ namespace SmartHouse.EntertainmetDevices
                     break;
 
 
-                case EqualizerModes.TrebleBoost: 
-                    EqualizerMode=EqualizerModes.TrebleBoost;
+                case EqualizerModes.TrebleBoost:
+                    EqualizerMode = EqualizerModes.TrebleBoost;
                     _bass = 50;
                     _treble = 100;
                     _mid = 50;
                     break;
 
                 case EqualizerModes.Studio:
-                    EqualizerMode=EqualizerModes.Studio;
+                    EqualizerMode = EqualizerModes.Studio;
                     _bass = 30;
                     _treble = 60;
                     _mid = 80;
@@ -125,7 +120,7 @@ namespace SmartHouse.EntertainmetDevices
 
         public void ConnectDeviceToSpeaker(Speaker speaker)
         {
-            if(!IsMultiDeviceSupport)
+            if (!IsMultiDeviceSupport)
             {
                 Console.WriteLine($"Speaker {DeviceName} does not support this feature");
                 return;
@@ -137,7 +132,7 @@ namespace SmartHouse.EntertainmetDevices
                 return;
             }
 
-            if(string.Compare(Brand,speaker.Brand,true)!=0)
+            if (string.Compare(Brand, speaker.Brand, true) != 0)
             {
                 Console.WriteLine("Speakers are not the same brand");
                 return;

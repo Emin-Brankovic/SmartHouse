@@ -1,18 +1,12 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
 using SmartHouse.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace SmartHouse.ClimateControlDevices
 {
     public class AirHumidifier : ClimateControlDevice
     {
-        public AirHumidifier(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel, bool isAutoAdjustEnabled, double waterTankCapacity, double waterLevel, double currentHumidity,double targetHumidity, int mistOutputLevel,List<int> mistOutputLevels, ClimateControlDeviceTypes deviceType = ClimateControlDeviceTypes.Humidifier, FiltersStatuses filterStatus = FiltersStatuses.Clean, bool connection = true)
+        public AirHumidifier(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel, bool isAutoAdjustEnabled, double waterTankCapacity, double waterLevel, double currentHumidity, double targetHumidity, int mistOutputLevel, List<int> mistOutputLevels, ClimateControlDeviceTypes deviceType = ClimateControlDeviceTypes.Humidifier, FiltersStatuses filterStatus = FiltersStatuses.Clean, bool connection = true)
                     : base(deviceName, brand, fanSpeeds, energyUsage, noiseLevel, isAutoAdjustEnabled, deviceType, filterStatus, connection)
         {
             WaterTankCapacity = waterTankCapacity;

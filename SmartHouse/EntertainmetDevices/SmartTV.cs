@@ -1,19 +1,13 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
 using SmartHouse.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Versioning;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.EntertainmetDevices
 {
     public class SmartTV : EntertainmentDevice
     {
-        public SmartTV(string deviceName, string brand ,List<ConnectivityTypes> connectivityTypes,List<int> supportedRefreshRates,
-            List<StreamingApps> apps,List<string> sources,List<string> supportedResolutions, List<PictureModes> supportedPictureMode, int screenSize, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.SmartTV, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, deviceType, connection, maxVolume)
+        public SmartTV(string deviceName, string brand, List<ConnectivityTypes> connectivityTypes, List<int> supportedRefreshRates,
+            List<StreamingApps> apps, List<string> sources, List<string> supportedResolutions, List<PictureModes> supportedPictureMode, int screenSize, EntertainmentDeviceTypes deviceType = EntertainmentDeviceTypes.SmartTV, bool connection = true, int maxVolume = 100) : base(deviceName, connectivityTypes, brand, deviceType, connection, maxVolume)
         {
             SupportedApps = apps;
             Sources = sources;
@@ -26,17 +20,17 @@ namespace SmartHouse.EntertainmetDevices
         public int RefreshRate { get; private set; } = 60;
         public List<int> SupportedRefreshRates { get; private set; } = new List<int>();
         public bool IsAdaptiveBrightness { get; private set; }
-        public List<PictureModes> SupportedPictureMode { get; private set; }= new List<PictureModes>();
+        public List<PictureModes> SupportedPictureMode { get; private set; } = new List<PictureModes>();
         public PictureModes PictureMode { get; private set; } = PictureModes.Standard;
         public int Brightness { get; private set; } = 100;
         public int Contrast { get; private set; } = 50;
         public int Sharpness { get; private set; } = 50;
         public int Color { get; private set; } = 50;
         public string Resolution { get; private set; } = "1080p";
-        public List<string> SupportedResolutions { get; private set; }=new List<string>();
-        public string CurrentApp { get; private set; }=string.Empty;
+        public List<string> SupportedResolutions { get; private set; } = new List<string>();
+        public string CurrentApp { get; private set; } = string.Empty;
         public List<StreamingApps> SupportedApps { get; private set; } = new List<StreamingApps>();
-        public List<string> Sources { get; private set; }=new List<string>();
+        public List<string> Sources { get; private set; } = new List<string>();
         public string Source { get; private set; } = "HDMI1";
         public int ScreenSize { get; private set; }
 
@@ -103,7 +97,7 @@ namespace SmartHouse.EntertainmetDevices
 
         public void OpenApp()
         {
-            CurrentApp= Helper.SelectSupported<StreamingApps>(SupportedApps).ToString();
+            CurrentApp = Helper.SelectSupported<StreamingApps>(SupportedApps).ToString();
             Console.WriteLine($"{CurrentApp} opened on {DeviceName}");
         }
 
@@ -123,7 +117,7 @@ namespace SmartHouse.EntertainmetDevices
 
         public void ChangeRefreshRate()
         {
-            RefreshRate=Helper.SelectSupported<int>(SupportedRefreshRates);
+            RefreshRate = Helper.SelectSupported<int>(SupportedRefreshRates);
             Console.WriteLine($"{DeviceName} refreshrate changed to {RefreshRate}");
         }
 

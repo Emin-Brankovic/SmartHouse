@@ -3,12 +3,6 @@ using SmartHouse.Devices;
 using SmartHouse.EntertainmetDevices;
 using SmartHouse.Enums;
 using SmartHouse.SecurityDevices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.Repository
 {
@@ -25,7 +19,7 @@ namespace SmartHouse.Repository
             {
                 new SmartTV("Neo QLED", "Samsung", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }, new List<int>{ 60,120,144,165 } ,new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.Spotify,StreamingApps.PrimeVideo }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2", "HDMI3" }, new List<string> { "1080p", "UHD", "4K", "4K UHD","8K" }, new List<PictureModes>{PictureModes.Standard,PictureModes.Natural,PictureModes.Vivid,PictureModes.Game} ,50),
 
-                new SmartTV("U6K", "Hisens", new List<ConnectivityTypes> { ConnectivityTypes.HDMI}, new List<int>{ 60,120,144} 
+                new SmartTV("U6K", "Hisens", new List<ConnectivityTypes> { ConnectivityTypes.HDMI}, new List<int>{ 60,120,144}
                 ,new List<StreamingApps> { StreamingApps.Netflix, StreamingApps.HBOMax, StreamingApps.YouTube, StreamingApps.DisneyPlus }, new List<string> { "Analog", "Digital", "HDMI1", "HDMI2" }, new List<string> { "1080p", "UHD", "4K", "4K UHD","6K" },  new List<PictureModes>{PictureModes.Standard,PictureModes.Natural,PictureModes.Movie}  ,42),
 
                 new SmartTV("G5", "LG", new List<ConnectivityTypes> { ConnectivityTypes.HDMI, ConnectivityTypes.DisplayPort }
@@ -74,8 +68,8 @@ namespace SmartHouse.Repository
 
 
         //SecurityDevices
-        public static List<MotionSensor>? MotionSensors { get; set; } 
-        public static List<SecurityCamera>? SecurityCameras { get; set; } 
+        public static List<MotionSensor>? MotionSensors { get; set; }
+        public static List<SecurityCamera>? SecurityCameras { get; set; }
         public static List<SmartLock>? SmartLocks { get; set; }
 
         public static void CreateSecurityCameras()
@@ -88,7 +82,7 @@ namespace SmartHouse.Repository
                 new SecurityCamera("Floodlight Cam E340","Eufy","Backyard",new List < string > { "720p", "1080p", "UHD", "2K" },30,false,"3TB"),
             };
         }
-        public static void CreateSmartLocks() 
+        public static void CreateSmartLocks()
         {
             SmartLocks = new List<SmartLock>()
             {
@@ -111,9 +105,9 @@ namespace SmartHouse.Repository
 
 
         //ClimateControlDevices
-        public static List<AirConditioner>? AirConditioners { get; set; } 
-        public static List<AirPurifier>? AirPurifiers { get; set; } 
-        public static List<AirHumidifier>? AirAirHumidifiers { get; set; } 
+        public static List<AirConditioner>? AirConditioners { get; set; }
+        public static List<AirPurifier>? AirPurifiers { get; set; }
+        public static List<AirHumidifier>? AirAirHumidifiers { get; set; }
 
 
         public static void CreateAirConditioners()
@@ -166,7 +160,7 @@ namespace SmartHouse.Repository
         }
 
 
-        public static void PopulateRepository() 
+        public static void PopulateRepository()
         {
             CreateMotionSensors();
             CreateSecurityCameras();

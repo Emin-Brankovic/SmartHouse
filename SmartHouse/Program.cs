@@ -1,14 +1,4 @@
-﻿using SmartHouse.ClimateControlDevices;
-using SmartHouse.Devices;
-using SmartHouse.EntertainmetDevices;
-using SmartHouse.Enums;
-using SmartHouse.Models;
-using SmartHouse.Repository;
-using SmartHouse.SecurityDevices;
-using SmartHouse.SmartHouseSystems;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
+﻿using SmartHouse.Repository;
 
 namespace SmartHouse
 {
@@ -16,7 +6,7 @@ namespace SmartHouse
     {
         static void Main(string[] args)
         {
-            
+
             InMemoryRepository.PopulateRepository();
 
             //LightSystem

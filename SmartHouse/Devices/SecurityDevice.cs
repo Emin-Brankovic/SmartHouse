@@ -1,13 +1,6 @@
 ﻿using SmartHouse.Enums;
 using SmartHouse.Helpers;
-using SmartHouse.Interfaces;
 using SmartHouse.Models;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.Devices
 {
@@ -20,9 +13,9 @@ namespace SmartHouse.Devices
         All
     }
 
-    public abstract class SecurityDevice : SmartHouseDevice  
+    public abstract class SecurityDevice : SmartHouseDevice
     {
-        public SecurityDevice(string deviceName,string location,string brand, SecurityDeviceTypes deviceType, bool connection = true)
+        public SecurityDevice(string deviceName, string location, string brand, SecurityDeviceTypes deviceType, bool connection = true)
             : base(deviceName, brand, connection)
         {
             Location = location;
@@ -42,7 +35,7 @@ namespace SmartHouse.Devices
 
         public void UpdateDeviceLocation(string location)
         {
-            
+
             if (Helper.IsDeviceOn(this))
             {
                 Location = location;

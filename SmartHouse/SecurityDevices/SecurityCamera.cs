@@ -1,17 +1,11 @@
 ﻿using SmartHouse.Devices;
-using SmartHouse.Enums;
 using SmartHouse.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.SecurityDevices
 {
     public class SecurityCamera : SecurityDevice
     {
-        public SecurityCamera(string deviceName, string brand, string location, List<string> supportedResolutions, int fps, bool isRecording, 
+        public SecurityCamera(string deviceName, string brand, string location, List<string> supportedResolutions, int fps, bool isRecording,
             string capacity, SecurityDeviceTypes deviceType = SecurityDeviceTypes.SecurityCamera, bool connection = true) : base(deviceName, location, brand, deviceType, connection)
         {
             SupportedResolutions = supportedResolutions;
@@ -43,10 +37,10 @@ namespace SmartHouse.SecurityDevices
         public void ChangeFPS(int fps)
         {
             Console.WriteLine($"Change the FPS, {DeviceName} supports between {MinFPS}-{MaxFPS}");
-            if (fps >= MinFPS && fps<=MaxFPS)
-           {
+            if (fps >= MinFPS && fps <= MaxFPS)
+            {
                 FPS = fps;
-           }
+            }
         }
 
         public void StartRecording()

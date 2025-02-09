@@ -1,11 +1,6 @@
 ﻿using SmartHouse.Enums;
 using SmartHouse.Helpers;
 using SmartHouse.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.Devices
 {
@@ -20,13 +15,13 @@ namespace SmartHouse.Devices
     public abstract class ClimateControlDevice : SmartHouseDevice
     {
         public ClimateControlDevice(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel,
-           bool isAutoAdjustEnabled, ClimateControlDeviceTypes deviceType, FiltersStatuses filterStatus=FiltersStatuses.Clean, bool connection = true) 
+           bool isAutoAdjustEnabled, ClimateControlDeviceTypes deviceType, FiltersStatuses filterStatus = FiltersStatuses.Clean, bool connection = true)
             : base(deviceName, brand, connection)
         {
             FanSpeeds = fanSpeeds;
             EnergyUsage = energyUsage;
             NoiseLevel = noiseLevel;
-            IsAutoAdjustEnabled = isAutoAdjustEnabled;  
+            IsAutoAdjustEnabled = isAutoAdjustEnabled;
             FilterStatus = filterStatus;
             DeviceType = deviceType;
         }
@@ -44,7 +39,7 @@ namespace SmartHouse.Devices
             Console.WriteLine("Change fan speed\n");
 
             var selected = Helper.SelectSupported<int>(FanSpeeds);
-            CurrentFanSpeed= selected;
+            CurrentFanSpeed = selected;
 
             Console.WriteLine($"{DeviceName} fan speed changed to {CurrentFanSpeed}");
         }

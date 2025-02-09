@@ -1,12 +1,6 @@
 ﻿using SmartHouse.Devices;
-using SmartHouse.Interfaces;
 using SmartHouse.Models;
 using SmartHouse.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.SmartHouseSystems
 {
@@ -34,89 +28,53 @@ namespace SmartHouse.SmartHouseSystems
         }
 
 
-        public void MuteAllDevices(EntertainmentDeviceTypes deviceType)
+        public void MuteDevices(EntertainmentDeviceTypes deviceType)
         {
-            if (EntertainmentDeviceTypes.All == deviceType)
-            {
-                foreach (var device in _devices)
-                {
-                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                    if (entertainmentDevice!=null && entertainmentDevice.IsOn)
-                    {
-                        entertainmentDevice.MuteDevice();
-                   
-                    }
-                }
-            }
-            else
-            {
-                foreach (var device in _devices)
-                {
-                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                    if (entertainmentDevice != null && entertainmentDevice.IsOn && entertainmentDevice.DeviceType==deviceType)
-                    {
-                        entertainmentDevice.MuteDevice();
+            Console.WriteLine($"Muting {deviceType} devices\n");
 
-                    }
+            foreach (var device in _devices)
+            {
+                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                if (entertainmentDevice != null && entertainmentDevice.IsOn &&
+                    (deviceType == EntertainmentDeviceTypes.All || entertainmentDevice.DeviceType == deviceType))
+                {
+                    entertainmentDevice.MuteDevice();
+
                 }
             }
+
         }
 
-        public void UnmuteAllDevices(EntertainmentDeviceTypes deviceType)
+        public void UnmuteDevices(EntertainmentDeviceTypes deviceType)
         {
-            if (EntertainmentDeviceTypes.All == deviceType)
-            {
-                foreach (var device in _devices)
-                {
-                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                    if (entertainmentDevice != null && entertainmentDevice.IsOn)
-                    {
-                        entertainmentDevice.UnmuteDevice();
+            Console.WriteLine($"Unmuting {deviceType} devices\n");
+            foreach (var device in _devices)
+           {
+               EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+               if (entertainmentDevice != null && entertainmentDevice.IsOn &&
+                  (deviceType == EntertainmentDeviceTypes.All || entertainmentDevice.DeviceType == deviceType))
+               {
+                   entertainmentDevice.UnmuteDevice();
 
-                    }
-                }
-            }
-            else
-            {
-                foreach (var device in _devices)
-                {
-                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                    if (entertainmentDevice != null && entertainmentDevice.IsOn && entertainmentDevice.DeviceType == deviceType)
-                    {
-                        entertainmentDevice.UnmuteDevice();
+               }
+           }
 
-                    }
-                }
-            }
         }
 
-        public void ChangeVolumeAllDevices(int volume, EntertainmentDeviceTypes deviceType)
+        public void ChangeVolumeDevices(int volume, EntertainmentDeviceTypes deviceType)
         {
-
-            if (EntertainmentDeviceTypes.All == deviceType)
+            Console.WriteLine($"Changing volume {deviceType} devices\n");
+            foreach (var device in _devices)
             {
-                foreach (var device in _devices)
+                EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
+                if (entertainmentDevice != null && entertainmentDevice.IsOn &&
+                   (deviceType == EntertainmentDeviceTypes.All || entertainmentDevice.DeviceType == deviceType))
                 {
-                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                    if (entertainmentDevice != null && entertainmentDevice.IsOn)
-                    {
-                        entertainmentDevice.CurrentVolume = volume;
+                    entertainmentDevice.CurrentVolume = volume;
 
-                    }
                 }
             }
-            else
-            {
-                foreach (var device in _devices)
-                {
-                    EntertainmentDevice? entertainmentDevice = device as EntertainmentDevice;
-                    if (entertainmentDevice != null && entertainmentDevice.IsOn && entertainmentDevice.DeviceType == deviceType)
-                    {
-                        entertainmentDevice.CurrentVolume = volume;
 
-                    }
-                }
-            }
 
         }
     }

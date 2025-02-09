@@ -1,12 +1,6 @@
 ﻿using SmartHouse.Devices;
-using SmartHouse.Interfaces;
 using SmartHouse.Models;
 using SmartHouse.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.SmartHouseSystems
 {
@@ -33,35 +27,21 @@ namespace SmartHouse.SmartHouseSystems
             _devices.AddRange(InMemoryRepository.AirPurifiers);
         }
 
-        public void ChangeFanSpeedOfAllDevices(int fanSpeed,ClimateControlDeviceTypes deviceType)
+        public void ChangeFanSpeedOfDevices(int fanSpeed, ClimateControlDeviceTypes deviceType)
         {
-            Console.WriteLine($"Changing fan speed of all devices to {fanSpeed} \n");
+            Console.WriteLine($"Changing fan speed of {deviceType} devices to {fanSpeed} \n");
 
-            if (deviceType == ClimateControlDeviceTypes.All)
+            foreach (var device in _devices)
             {
-                foreach (var device in _devices)
+                ClimateControlDevice? climateControlDevice = device as ClimateControlDevice;
+                if (climateControlDevice != null && climateControlDevice.IsOn &&
+                    (deviceType == ClimateControlDeviceTypes.All || climateControlDevice.DeviceType == deviceType))
                 {
-                    ClimateControlDevice? climateControlDevice = device as ClimateControlDevice;
-                    if (climateControlDevice != null && climateControlDevice.IsOn)
-                    {
-                        climateControlDevice.CurrentFanSpeed=fanSpeed;
+                    climateControlDevice.CurrentFanSpeed = fanSpeed;
 
-                    }
                 }
             }
-            else
-            {
-                Console.WriteLine($"Changing fan spped of {deviceType} devices to {fanSpeed} \n");
 
-                foreach (var device in _devices)
-                {
-                    ClimateControlDevice? climateControlDevice = device as ClimateControlDevice;
-                    if (climateControlDevice != null && climateControlDevice.IsOn && climateControlDevice.DeviceType==deviceType)
-                    {
-                        climateControlDevice.CurrentFanSpeed = fanSpeed;
-                    }
-                }
-            }
         }
     }
 }

@@ -1,16 +1,11 @@
 ﻿using SmartHouse.Devices;
 using SmartHouse.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.ClimateControlDevices
 {
     public class AirPurifier : ClimateControlDevice
     {
-        public AirPurifier(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel, bool isAutoAdjustEnabled, int cleanAirDeliveryRate, double coverageArea,bool hasAirQualitySensor, int currentAirQualityLevel, string filterType, ClimateControlDeviceTypes deviceType = ClimateControlDeviceTypes.Purifier,FiltersStatuses filterStatus = FiltersStatuses.Clean, bool connection = true)
+        public AirPurifier(string deviceName, string brand, List<int> fanSpeeds, double energyUsage, double noiseLevel, bool isAutoAdjustEnabled, int cleanAirDeliveryRate, double coverageArea, bool hasAirQualitySensor, int currentAirQualityLevel, string filterType, ClimateControlDeviceTypes deviceType = ClimateControlDeviceTypes.Purifier, FiltersStatuses filterStatus = FiltersStatuses.Clean, bool connection = true)
                     : base(deviceName, brand, fanSpeeds, energyUsage, noiseLevel, isAutoAdjustEnabled, deviceType, filterStatus, connection)
         {
             FilterType = filterType;
@@ -21,9 +16,9 @@ namespace SmartHouse.ClimateControlDevices
         }
 
 
-        public string FilterType { get; private set; } 
-        public int CleanAirDeliveryRate { get; private set; } 
-        public double CoverageArea { get; private set; } 
+        public string FilterType { get; private set; }
+        public int CleanAirDeliveryRate { get; private set; }
+        public double CoverageArea { get; private set; }
         public bool HasAirQualitySensor { get; private set; }
         public int CurrentAirQualityLevel { get; private set; }
 

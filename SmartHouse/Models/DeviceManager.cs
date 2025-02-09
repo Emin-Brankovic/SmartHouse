@@ -1,27 +1,21 @@
 ﻿using SmartHouse.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHouse.Models
 {
-    //TODO: Add ResetAllDevices method
     public abstract class DeviceManager : IDeviceManager
     {
-        protected List<SmartHouseDevice> _devices=new List<SmartHouseDevice>();
+        protected List<SmartHouseDevice> _devices = new List<SmartHouseDevice>();
 
 
         public void AddDevice(SmartHouseDevice device)
         {
-           _devices.Add(device);
+            _devices.Add(device);
             Console.WriteLine($"Device {device.DeviceName} was successfully added ");
         }
 
         public void RemoveDevice(string deviceName)
         {
-           var device=_devices.FirstOrDefault(x => x.DeviceName.ToLower() == deviceName.ToLower());
+            var device = _devices.FirstOrDefault(x => x.DeviceName.ToLower() == deviceName.ToLower());
             if (device != null)
             {
                 _devices.Remove(device);
@@ -39,7 +33,7 @@ namespace SmartHouse.Models
 
         public void ShowDevices()
         {
-            if(_devices.Count < 1 )
+            if (_devices.Count < 1)
             {
                 Console.WriteLine("No devices registered\n");
                 return;
@@ -73,7 +67,7 @@ namespace SmartHouse.Models
         {
             var device = _devices.FirstOrDefault(x => x.DeviceName.ToLower() == deviceName.ToLower());
             if (device != null) return device;
-            else 
+            else
             {
                 Console.WriteLine("Device not found");
                 return null;
