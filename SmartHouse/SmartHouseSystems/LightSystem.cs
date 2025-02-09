@@ -29,7 +29,7 @@ namespace SmartHouse.SmartHouseSystems
                 return null;
         }
 
-        public void InitDevices()
+        private void InitDevices()
         {
             _devices.AddRange(InMemoryRepository.LightDevices);
         }
@@ -64,7 +64,7 @@ namespace SmartHouse.SmartHouseSystems
             }
 
         }
-        public void ChangeLightBrightness(int brightnesLevel,LightDeviceTypes deviceType)
+        public void ChangeLightBrightnessOnDevices(int brightnesLevel,LightDeviceTypes deviceType)
         {
 
             if (LightDeviceTypes.All == deviceType)

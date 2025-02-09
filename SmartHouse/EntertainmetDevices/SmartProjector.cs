@@ -24,7 +24,7 @@ namespace SmartHouse.EntertainmetDevices
         private int _currentScreenSize;
             
 
-        public int Brightness { get; set; } = 100;
+        public int Brightness { get; private set; } = 100;
         public string Resolution { get; private set; } = "1080p";
         public int MinScreenSize { get; private set; } 
         public int MaxScreenSize { get; private set; } 
@@ -41,7 +41,7 @@ namespace SmartHouse.EntertainmetDevices
             } }
         public bool BuiltInSpeakers { get; private set; }
         public string CurrentApp { get; private set; } = string.Empty;
-        public List<StreamingApps> SupportedApps { get; set; } = new List<StreamingApps>();
+        public List<StreamingApps> SupportedApps { get; private set; } = new List<StreamingApps>();
         public List<string> SupportedResolutions { get; private set; } = new List<string>();
 
 
@@ -70,6 +70,19 @@ namespace SmartHouse.EntertainmetDevices
                 _currentScreenSize=screenSize;
                 Console.WriteLine($"{DeviceName} screen size changed to {screenSize}'' ");
             }
+        }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Resolution: {Resolution}");
+            Console.WriteLine($"Brightness: {Brightness}%");
+            Console.WriteLine($"Screen Size: {CurrentScreenSize} inches (Range: {MinScreenSize} - {MaxScreenSize} inches)");
+            Console.WriteLine($"Built-In Speakers: {(BuiltInSpeakers ? "Yes" : "No")}");
+            Console.WriteLine($"Current App: {(string.IsNullOrEmpty(CurrentApp) ? "None" : CurrentApp)}");
+            Console.WriteLine($"Supported Resolutions: {string.Join(", ", SupportedResolutions)}");
+            Console.WriteLine($"Supported Streaming Apps: {string.Join(", ", SupportedApps)}");
         }
 
     }

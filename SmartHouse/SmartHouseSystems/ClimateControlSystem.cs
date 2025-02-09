@@ -26,7 +26,7 @@ namespace SmartHouse.SmartHouseSystems
                 return null;
         }
 
-        public void InitDevices()
+        private void InitDevices()
         {
             _devices.AddRange(InMemoryRepository.AirAirHumidifiers);
             _devices.AddRange(InMemoryRepository.AirConditioners);
@@ -35,6 +35,8 @@ namespace SmartHouse.SmartHouseSystems
 
         public void ChangeFanSpeedOfAllDevices(int fanSpeed,ClimateControlDeviceTypes deviceType)
         {
+            Console.WriteLine($"Changing fan speed of all devices to {fanSpeed} \n");
+
             if (deviceType == ClimateControlDeviceTypes.All)
             {
                 foreach (var device in _devices)
@@ -49,6 +51,8 @@ namespace SmartHouse.SmartHouseSystems
             }
             else
             {
+                Console.WriteLine($"Changing fan spped of {deviceType} devices to {fanSpeed} \n");
+
                 foreach (var device in _devices)
                 {
                     ClimateControlDevice? climateControlDevice = device as ClimateControlDevice;

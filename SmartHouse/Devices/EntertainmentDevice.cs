@@ -47,9 +47,8 @@ namespace SmartHouse.Devices
         }
         private int MaxVolume { get; set; }
         public bool IsMuted { get; private set; }
-        public List<ConnectivityTypes> ConnectivityTypes { get;  set; }
-        public string CurrentlyPlaying { get; set; }=string.Empty;
-        public EntertainmentDeviceTypes DeviceType { get; set; }
+        public List<ConnectivityTypes> ConnectivityTypes { get; private set; }
+        public EntertainmentDeviceTypes DeviceType { get; private set; }
 
 
         public void MuteDevice()
@@ -87,7 +86,6 @@ namespace SmartHouse.Devices
             Console.WriteLine($"Device Type: {DeviceType}");
             Console.WriteLine($"Current Volume: {(IsMuted ? "Muted" : CurrentVolume.ToString())}");
             Console.WriteLine($"Max Volume: {MaxVolume}");
-            Console.WriteLine($"Currently Playing: {(string.IsNullOrEmpty(CurrentlyPlaying) ? "Nothing" : CurrentlyPlaying)}");
             Console.WriteLine($"Connectivity: {string.Join(", ", ConnectivityTypes)}");
         }
     }

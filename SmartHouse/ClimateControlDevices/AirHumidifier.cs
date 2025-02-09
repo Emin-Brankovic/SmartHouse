@@ -49,18 +49,25 @@ namespace SmartHouse.ClimateControlDevices
 
         public void SetMistOutput()
         {
+            Console.WriteLine("Change the mist output level\n");
             MistOutputLevel = Helper.SelectSupported<int>(MistOutputLevels);
         }
 
-        //public void UpdateRoomHumidity(double currentHumidity)
-        //{
-        //    CurrentHumidity = currentHumidity;
-        //    Console.WriteLine($"Current room humidity: {CurrentHumidity}%.");
-        //}
-
         public void ShowWaterLevel()
         {
-            Console.WriteLine($"Water level is {WaterLevel}");
+            Console.WriteLine($"Water level is {WaterLevel} L");
+        }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Water Tank Capacity: {WaterTankCapacity} liters");
+            Console.WriteLine($"Current Water Level: {WaterLevel} liters");
+            Console.WriteLine($"Current Humidity: {CurrentHumidity}%");
+            Console.WriteLine($"Target Humidity: {TargetHumidity}%");
+            Console.WriteLine($"Mist Output Level: {MistOutputLevel}");
+            Console.WriteLine($"Available Mist Output Levels: {string.Join(", ", MistOutputLevels)}");
         }
 
     }

@@ -30,6 +30,7 @@ namespace SmartHouse.SecurityDevices
 
         public void ChangeResolution()
         {
+            Console.WriteLine("Change resolution");
             var selected = Helper.SelectSupported<string>(SupportedResolutions);
             if (selected != null)
                 Resolution = selected;
@@ -41,7 +42,8 @@ namespace SmartHouse.SecurityDevices
 
         public void ChangeFPS(int fps)
         {
-           if(fps >= MinFPS && fps<=MaxFPS)
+            Console.WriteLine($"Change the FPS, {DeviceName} supports between {MinFPS}-{MaxFPS}");
+            if (fps >= MinFPS && fps<=MaxFPS)
            {
                 FPS = fps;
            }
@@ -59,5 +61,16 @@ namespace SmartHouse.SecurityDevices
             Console.WriteLine("Recording stopped");
         }
 
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Resolution: {Resolution}");
+            Console.WriteLine($"Supported Resolutions: {string.Join(", ", SupportedResolutions)}");
+            Console.WriteLine($"FPS: {FPS} (Range: {MinFPS} - {MaxFPS})");
+            Console.WriteLine($"Recording Status: {(IsRecording ? "Recording" : "Not Recording")}");
+            Console.WriteLine($"Capacity: {Capacity}");
+
+        }
     }
 }

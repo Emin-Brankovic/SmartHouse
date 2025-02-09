@@ -10,7 +10,6 @@ namespace SmartHouse.Models
     //TODO: Add ResetAllDevices method
     public abstract class DeviceManager : IDeviceManager
     {
-        //Maybe change data type from List to Dictionary. See the what is better for implementation
         protected List<SmartHouseDevice> _devices=new List<SmartHouseDevice>();
 
 
@@ -42,15 +41,18 @@ namespace SmartHouse.Models
         {
             if(_devices.Count < 1 )
             {
-                Console.WriteLine("No devices registered");
+                Console.WriteLine("No devices registered\n");
+                return;
             }
 
-           foreach(var device in _devices)
+            Console.WriteLine("Registered devices:");
+            foreach (var device in _devices)
                 Console.WriteLine($"{device.DeviceName} : {device.GetType().Name}");
         }
 
         public void TurnOffAllDevices()
         {
+            Console.WriteLine("Turning off all devices");
             foreach (var device in _devices)
             {
                 device.TurnOff();
@@ -59,6 +61,7 @@ namespace SmartHouse.Models
 
         public void TurnOnAllDevices()
         {
+            Console.WriteLine("Turning on all devices");
             foreach (var device in _devices)
             {
                 device.TurnOn();
@@ -70,7 +73,11 @@ namespace SmartHouse.Models
         {
             var device = _devices.FirstOrDefault(x => x.DeviceName.ToLower() == deviceName.ToLower());
             if (device != null) return device;
-            else return null;
+            else 
+            {
+                Console.WriteLine("Device not found");
+                return null;
+            }
         }
     }
 }

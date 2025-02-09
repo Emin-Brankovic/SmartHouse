@@ -32,12 +32,12 @@ namespace SmartHouse.Devices
         public int BatteryLevel { get; private set; } = 60;
         public string Location { get; private set; }
         public SecurityDeviceStates State { get; private set; } = SecurityDeviceStates.Disarmed;
-        public SecurityDeviceTypes DeviceType { get; set; }
+        public SecurityDeviceTypes DeviceType { get; private set; }
 
         public void ShowBatteryLevel()
         {
             if (Helper.IsDeviceOn(this))
-                Console.WriteLine($"Battery: {BatteryLevel}");
+                Console.WriteLine($"Battery level for {DeviceName}: {BatteryLevel}");
         }
 
         public void UpdateDeviceLocation(string location)
@@ -55,10 +55,19 @@ namespace SmartHouse.Devices
             if (Helper.IsDeviceOn(this))
             {
                 State = state;
-                Console.WriteLine($"Device state changed to: {state}");
+                Console.WriteLine($"{DeviceName} state changed to: {state}");
             }
         }
 
-      
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Device Type: {DeviceType}");
+            Console.WriteLine($"Battery Level: {BatteryLevel}%");
+            Console.WriteLine($"Location: {Location}");
+            Console.WriteLine($"Device State: {State}");
+        }
+
     }
 }

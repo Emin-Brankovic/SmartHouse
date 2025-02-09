@@ -37,10 +37,12 @@ namespace SmartHouse.Devices
         public double NoiseLevel { get; private set; } //dB
         public bool IsAutoAdjustEnabled { get; private set; }
         public FiltersStatuses FilterStatus { get; private set; }
-        public ClimateControlDeviceTypes DeviceType { get; set; }
+        public ClimateControlDeviceTypes DeviceType { get; private set; }
 
         public void ChangeFanSpeed()
         {
+            Console.WriteLine("Change fan speed\n");
+
             var selected = Helper.SelectSupported<int>(FanSpeeds);
             CurrentFanSpeed= selected;
 

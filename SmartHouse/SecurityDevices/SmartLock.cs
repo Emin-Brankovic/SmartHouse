@@ -17,10 +17,10 @@ namespace SmartHouse.SecurityDevices
             IsRFID = isRFID;
         }
 
-        public bool IsLocked { get; set; }
-        public bool IsPINCode { get; set; }
-        public bool IsFingerPrint { get; set; }
-        public bool IsRFID { get; set; }
+        public bool IsLocked { get; private set; }
+        public bool IsPINCode { get; private set; }
+        public bool IsFingerPrint { get; private set; }
+        public bool IsRFID { get; private set; }
 
         public void LockDoor()
         {
@@ -32,6 +32,16 @@ namespace SmartHouse.SecurityDevices
         {
             IsLocked = false;
             Console.WriteLine($"{DeviceName} is locked");
+        }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Device Locked: {(IsLocked ? "Locked" : "Unlocked")}");
+            Console.WriteLine($"PIN Code Authentication: {(IsPINCode ? "Supported" : "Unsupported")}");
+            Console.WriteLine($"Fingerprint Authentication: {(IsFingerPrint ? "Supported" : "Unsupported")}");
+            Console.WriteLine($"RFID Authentication: {(IsRFID ? "Supported" : "Unsupported")}");
         }
     }
 }

@@ -15,8 +15,16 @@ namespace SmartHouse.SecurityDevices
             DetectionRange = range;
         }
 
-        public int SensorSensitivity { get; set; }
-        public int DetectionRange { get; set; }
+        public int SensorSensitivity { get; private set; }
+        public int DetectionRange { get; private set; }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Sensor Sensitivity: {SensorSensitivity}");
+            Console.WriteLine($"Detection Range: {DetectionRange} meters");
+        }
 
     }
 }

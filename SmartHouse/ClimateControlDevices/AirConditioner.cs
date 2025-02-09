@@ -22,7 +22,7 @@ namespace SmartHouse.ClimateControlDevices
         public double CurrentTemperature { get; private set; }
         public double TargetTemperature { get; private set; }
         public string Mode { get; private set; } = "Cool";
-        public bool HasScheduling { get; set; }
+        public bool HasScheduling { get; private set; }
         public string WorkingStartTime { get; private set; } = string.Empty;
         public string WorkingStopTime { get; private set; } = string.Empty;
 
@@ -60,8 +60,21 @@ namespace SmartHouse.ClimateControlDevices
 
         public void ChangeMode()
         {
+            Console.WriteLine("Select wanted air conditioner mode");
             Mode = Helper.SelectSupported<string>(Modes);
         }
 
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Current Mode: {Mode}");
+            Console.WriteLine($"Current Temperature: {CurrentTemperature}°C");
+            Console.WriteLine($"Target Temperature: {TargetTemperature}°C");
+            Console.WriteLine($"Available Modes: {string.Join(", ", Modes)}");
+            Console.WriteLine($"Scheduling: {(HasScheduling ? "Enabled" : "Disabled")}");
+            Console.WriteLine($"Working Start Time: {(string.IsNullOrEmpty(WorkingStartTime) ? "Not Set" : WorkingStartTime)}");
+            Console.WriteLine($"Working Stop Time: {(string.IsNullOrEmpty(WorkingStopTime) ? "Not Set" : WorkingStopTime)}");
+        }
     }
 }

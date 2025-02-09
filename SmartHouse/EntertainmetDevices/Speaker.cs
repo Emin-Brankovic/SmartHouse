@@ -64,7 +64,7 @@ namespace SmartHouse.EntertainmetDevices
 
         public EqualizerModes EqualizerMode { get; private set; } = EqualizerModes.Standard;
         public bool IsMultiDeviceSupport { get; private set; }
-        public List<Speaker> ConnectedDevices=new List<Speaker>();
+        public List<Speaker> ConnectedDevices { get; private set; } = new List<Speaker>();
 
         public void ChangeEqualizerMode(EqualizerModes mode)
         {
@@ -180,6 +180,18 @@ namespace SmartHouse.EntertainmetDevices
             {
                 Console.WriteLine(speaker.DeviceName);
             }
+        }
+
+        public override void GetStatus()
+        {
+            base.GetStatus();
+
+            Console.WriteLine($"Equalizer Mode: {EqualizerMode}");
+            Console.WriteLine($"Bass: {Bass}");
+            Console.WriteLine($"Treble: {Treble}");
+            Console.WriteLine($"Mid: {Mid}");
+            Console.WriteLine($"Multi-Device Support: {(IsMultiDeviceSupport ? "Enabled" : "Disabled")}");
+            Console.WriteLine($"Connected Devices: {ConnectedDevices.Count}");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace SmartHouse.SmartHouseSystems
             else
                 return null;
         }
-        public void InitDevices()
+        private void InitDevices()
         {
             _devices.AddRange(InMemoryRepository.SecurityCameras);
             _devices.AddRange(InMemoryRepository.SmartLocks);
@@ -41,6 +41,7 @@ namespace SmartHouse.SmartHouseSystems
 
             if (SecurityDeviceTypes.All == deviceType)
             {
+                Console.WriteLine("Arming all devices\n");
                 foreach (var device in _devices)
                 {
                     SecurityDevice? securityDevice = device as SecurityDevice;
@@ -49,10 +50,11 @@ namespace SmartHouse.SmartHouseSystems
                         securityDevice.UpdateDeviceState(SecurityDeviceStates.Armed);
                     }
                 }
-                Console.WriteLine("Security system armed.");
+                Console.WriteLine("\nSecurity system armed.");
             }
             else
             {
+                Console.WriteLine($"Disarming  {deviceType}  deviceses\n");
                 foreach (var device in _devices)
                 {
                     SecurityDevice? securityDevice = device as SecurityDevice;
@@ -67,18 +69,9 @@ namespace SmartHouse.SmartHouseSystems
 
         public void DisarmDevices(SecurityDeviceTypes deviceType)
         {
-            foreach (var device in _devices)
-            {
-                SecurityDevice? securityDevice = device as SecurityDevice;
-                if (securityDevice != null && securityDevice.IsOn)
-                {
-                    securityDevice.UpdateDeviceState(SecurityDeviceStates.Disarmed);
-                }
-            }
-            Console.WriteLine("Security system disarmed.");
-
             if (SecurityDeviceTypes.All == deviceType)
             {
+                Console.WriteLine("Disarming all devices\n");
                 foreach (var device in _devices)
                 {
                     SecurityDevice? securityDevice = device as SecurityDevice;
@@ -87,17 +80,18 @@ namespace SmartHouse.SmartHouseSystems
                         securityDevice.UpdateDeviceState(SecurityDeviceStates.Disarmed);
                     }
                 }
-                Console.WriteLine("Security system disarmed.");
+                Console.WriteLine("\nSecurity system disarmed.");
             }
             else
             {
+                Console.WriteLine($"Disarming {deviceType} devices\n");
                 foreach (var device in _devices)
                 {
                     SecurityDevice? securityDevice = device as SecurityDevice;
                     if (securityDevice != null && securityDevice.IsOn && securityDevice.DeviceType == deviceType)
                     {
                         securityDevice.UpdateDeviceState(SecurityDeviceStates.Disarmed);
-                        Console.WriteLine($"Device{securityDevice.DeviceName} is disarmed.");
+                        
                     }
                 }
             }

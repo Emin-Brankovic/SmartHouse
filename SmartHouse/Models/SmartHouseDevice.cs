@@ -18,13 +18,13 @@ namespace SmartHouse.Models
             Brand = brand;
         }
 
-        public int DeviceId { get; set; }
-        public string? DeviceName { get; set; }
-        public bool IsOn { get; set; }
-        public bool IsConnected { get; set; }
-        private static int _lastDeviceId=1;
+        public int DeviceId { get; private set; }
+        public string? DeviceName { get; private set; }
+        public bool IsOn { get; private set; }
+        public bool IsConnected { get; private set; }
         public string Brand { get; private set; }
 
+        private static int _lastDeviceId=1;
 
 
         public void Connect()
@@ -75,19 +75,19 @@ namespace SmartHouse.Models
         {
            IsOn = false;
            IsConnected = false;
-           DeviceName = string.Empty;
         }
 
         public void TurnOff()
         {
             IsOn = false;
+            Console.WriteLine($"{DeviceName} is off");
         }
 
         public void TurnOn()
         {
            IsOn = true;
+            Console.WriteLine($"{DeviceName} is on");
         }
-
 
     }
 }

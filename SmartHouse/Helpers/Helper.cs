@@ -33,7 +33,6 @@ namespace SmartHouse.Helpers
 
             Console.WriteLine("Select by entering the number");
 
-            Console.WriteLine("----------------------------------------------");
 
             do
             {

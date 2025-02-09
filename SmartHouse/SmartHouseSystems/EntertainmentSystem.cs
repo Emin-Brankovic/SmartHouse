@@ -26,7 +26,7 @@ namespace SmartHouse.SmartHouseSystems
                 throw new Exception("Device not found");
         }
 
-        public void InitDevices()
+        private void InitDevices()
         {
             _devices.AddRange(InMemoryRepository.SmartTVs);
             _devices.AddRange(InMemoryRepository.SmartProjectors);
